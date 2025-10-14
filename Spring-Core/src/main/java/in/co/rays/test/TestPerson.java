@@ -15,8 +15,10 @@ public class TestPerson {
 		
 		System.out.println("------------------");
 		
-		Person p1 = (Person) factory.getBean("person1");
-		System.out.println("Person's name : " + p1.getName());
-		System.out.println("Person's address : " + p1.getAddress());
+		/*
+		 * Person p1 = (Person) factory.getBean("person1");
+		 * System.out.println("Person's name : " + p1.getName());
+		 * System.out.println("Person's address : " + p1.getAddress());
+		 */
 	}
 }
