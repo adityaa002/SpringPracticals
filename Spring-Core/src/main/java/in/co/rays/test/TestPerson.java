@@ -13,7 +13,7 @@ public class TestPerson {
 		System.out.println("Person's name : " + p.getName());
 		System.out.println("Person's address : " + p.getAddress());
 
-		System.out.println("____________________________");
+		System.out.println("--------------------------");
 
 		Person p1 = (Person) factory.getBean("person1");
 		System.out.println("Person's name : " + p1.getName());
