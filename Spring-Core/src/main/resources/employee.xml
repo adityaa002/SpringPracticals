@@ -3,14 +3,12 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-	<!-- <bean id="employee" class="in.co.rays.test.Employee">
-		<property name="name" value="Vinod" />
-		<property name="salary" value="1000" />
-	</bean> -->
+	<!-- <bean id="employee" class="in.co.rays.test.Employee"> <property name="name" 
+		value="Vinod" /> <property name="salary" value="1000" /> </bean> -->
 
-	<bean id="employee" class="in.co.rays.Employee">
-		<constructor-arg name="name" value="Aditya" />
-		<constructor-arg name="salary" value="50000" />
+	<bean id="employee" class="in.co.rays.test.Employee">
+		<constructor-arg name="name" value="Dev"></constructor-arg>
+		<constructor-arg name="salary" value="50000"></constructor-arg>
 	</bean>
 
 </beans>
