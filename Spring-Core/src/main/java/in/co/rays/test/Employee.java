@@ -5,6 +5,10 @@ public class Employee {
 	private String name;
 	private String salary;
 
+	public Employee() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public Employee(String name, String salary) {
 		this.name = name;
 		this.salary = salary;

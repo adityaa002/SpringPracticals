@@ -5,7 +5,6 @@ import org.springframework.beans.factory.xml.XmlBeanFactory;
 import org.springframework.core.io.ClassPathResource;
 
 public class TestEmployee {
-	
 
 	public static void main(String[] args) {
 
@@ -14,6 +13,10 @@ public class TestEmployee {
 
 		System.out.println("Name :" + emp.getName());
 		System.out.println("Salary :" + emp.getSalary());
+
+		Person p = (Person) factory.getBean("person");
+		System.out.println("Name :" + p.getName());
+		System.out.println("Address :" + p.getAddress());
 	}
 
 }
