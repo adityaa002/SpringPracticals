@@ -3,10 +3,10 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-	<bean id="employee" class="in.co.rays.test.Employee">
+	<!-- <bean id="employee" class="in.co.rays.test.Employee">
 		<property name="name" value="Vinod" />
 		<property name="salary" value="1000" />
-	</bean>
+	</bean> -->
 
 	<bean id="employee" class="in.co.rays.Employee">
 		<constructor-arg name="name" value="Aditya" />
