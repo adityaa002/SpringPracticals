@@ -14,9 +14,6 @@ public class TestEmployee {
 		System.out.println("Name :" + emp.getName());
 		System.out.println("Salary :" + emp.getSalary());
 
-		Person p = (Person) factory.getBean("person");
-		System.out.println("Name :" + p.getName());
-		System.out.println("Address :" + p.getAddress());
 	}
 
 }
