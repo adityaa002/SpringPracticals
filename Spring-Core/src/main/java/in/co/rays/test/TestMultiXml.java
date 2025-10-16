@@ -8,14 +8,23 @@ public class TestMultiXml {
 
 	public static void main(String[] args) {
 		BeanFactory factory = new XmlBeanFactory(new ClassPathResource("MultiXML.xml"));
-		Person p = (Person) factory.getBean("person");
+
+		// With typeCasting
+		// Person p = (Person) factory.getBean("person");
+
+		// Without typeCasting
+		Person p = factory.getBean("person", Person.class);
 
 		System.out.println("Person's name : " + p.getName());
 		System.out.println("Person's address : " + p.getAddress());
 
 		System.out.println("----------------------------");
-		
-		Employee emp = (Employee) factory.getBean("employee");
+
+		// With typeCasting
+		// Employee emp = (Employee) factory.getBean("employee");
+
+		// Without typeCasting
+		Employee emp = factory.getBean("employee", Employee.class);
 
 		System.out.println("Name :" + emp.getName());
 		System.out.println("Salary :" + emp.getSalary());
