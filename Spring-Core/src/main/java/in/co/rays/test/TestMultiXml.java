@@ -38,9 +38,17 @@ public class TestMultiXml {
 		System.out.println("Person's name : " + p.getName());
 		System.out.println("Person's address : " + p.getAddress());
 
+		System.out.println("----------------------------");
+
 		Employee emp = context.getBean("employee", Employee.class);
 		System.out.println("Name :" + emp.getName());
 		System.out.println("Salary :" + emp.getSalary());
+
+		System.out.println("----------------------------");
+
+		Student st = context.getBean("student", Student.class);
+		System.out.println("RollNo :" + st.getRollNo());
+		System.out.println("Name :" + st.getName());
 
 	}
 }
