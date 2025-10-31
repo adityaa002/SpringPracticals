@@ -4,9 +4,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-	<bean id="dao1" class="in.co.rays.autowire.bytype.UserDAOImpl" />
-
-	<bean id="userService" class="in.co.rays.autowire.bytype.UserService" autowire="byType" />
-
-
+	<bean id="userDao" class="in.co.rays.autowire.bytype.UserDAOImpl" />
+	<bean id="userService"
+		class="in.co.rays.autowire.bytype.UserService" autowire="byType" />
 </beans>
