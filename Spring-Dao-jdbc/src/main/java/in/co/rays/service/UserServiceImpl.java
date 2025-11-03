@@ -21,4 +21,9 @@ public class UserServiceImpl implements UserServiceInt {
 
 	}
 
+	public void update(UserDto dto) {
+		dao.update(dto);
+
+	}
+
 }
