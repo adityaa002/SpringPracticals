@@ -17,8 +17,11 @@ public class TestUserService {
 	public static void main(String[] args) {
 		ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 		TestUserService test = context.getBean(TestUserService.class);
+		
 		//test.testAdd();
-		test.testUpdate();
+		//test.testUpdate();
+		test.testDelete();
+		
 	}
 
 	public void testAdd() {
@@ -43,5 +46,12 @@ public class TestUserService {
 		dto.setId(1);
 		service.update(dto);
 		System.out.println("record updated");
+	}
+	
+	public void testDelete() {
+		UserDto dto = new UserDto();
+		dto.setId(2);
+		service.delete(dto);
+		System.out.println("Record deleted");
 	}
 }
