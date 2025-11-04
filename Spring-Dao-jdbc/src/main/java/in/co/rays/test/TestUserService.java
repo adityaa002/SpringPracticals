@@ -14,22 +14,23 @@ public class TestUserService {
 	@Autowired
 	public UserServiceInt service;
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 		TestUserService test = context.getBean(TestUserService.class);
-		
-		//test.testAdd();
-		//test.testUpdate();
-		test.testDelete();
-		
+
+		// test.testAdd();
+		// test.testUpdate();
+		// test.testDelete();
+		// test.testFindByLogin();
+		test.testAuthenticate();
 	}
 
-	public void testAdd() {
+	public void testAdd() throws Exception {
 		UserDto dto = new UserDto();
 		dto.setId(2);
 		dto.setFirstName("abc");
 		dto.setLastName("xyz");
-		dto.setLogin("admin123");
+		dto.setLogin("admin22");
 		dto.setPassword("123");
 		long pk = service.add(dto);
 
@@ -47,11 +48,41 @@ public class TestUserService {
 		service.update(dto);
 		System.out.println("record updated");
 	}
-	
+
 	public void testDelete() {
 		UserDto dto = new UserDto();
 		dto.setId(2);
 		service.delete(dto);
 		System.out.println("Record deleted");
 	}
+
+	public void testFindByLogin() {
+
+		UserDto dto = service.findByLogin("admin");
+
+		if (dto != null) {
+			System.out.print(dto.getId());
+			System.out.print("\t" + dto.getFirstName());
+			System.out.print("\t" + dto.getLastName());
+			System.out.print("\t" + dto.getLogin());
+			System.out.println("\t" + dto.getPassword());
+		} else {
+			System.out.println("record not found...!");
+		}
+	}
+
+	public void testAuthenticate() {
+		UserDto dto = service.authenticate("admin", "pass123");
+
+		if (dto != null) {
+			System.out.print(dto.getId());
+			System.out.print("\t" + dto.getFirstName());
+			System.out.print("\t" + dto.getLastName());
+			System.out.print("\t" + dto.getLogin());
+			System.out.println("\t" + dto.getPassword());
+		} else {
+			System.out.println("Invalid Credentials...!");
+		}
+	}
+
 }

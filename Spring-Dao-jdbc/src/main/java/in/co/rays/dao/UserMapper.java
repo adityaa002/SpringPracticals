@@ -16,7 +16,6 @@ public class UserMapper implements RowMapper<UserDto> {
 		dto.setLastName(rs.getString(3));
 		dto.setLogin(rs.getString(4));
 		dto.setPassword(rs.getString(5));
-		return null;
+		return dto;
 	}
-
 }
