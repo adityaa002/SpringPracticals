@@ -39,4 +39,11 @@ public class UserDaoJdbcImpl implements UserDaoInt {
 		jdbcTemplate.update(sql, dto.getId());
 	}
 
+	public UserDto findByLogin(String login) {
+		String sql = "select id, firstName , lastName , login , password where login = ?";
+		Object[] param = { login };
+		UserDto dto = jdbcTemplate.queryForObject(sql, param, new UserMapper());
+		return dto ;
+	}
+
 }
