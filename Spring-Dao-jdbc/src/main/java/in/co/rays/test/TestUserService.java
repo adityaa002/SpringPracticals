@@ -1,5 +1,9 @@
 package in.co.rays.test;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -22,15 +26,38 @@ public class TestUserService {
 		// test.testUpdate();
 		// test.testDelete();
 		// test.testFindByLogin();
-		test.testAuthenticate();
+		// test.testAuthenticate();
+		 test.testSearch();
+	}
+
+	public void testSearch() throws Exception {
+		UserDto dto = new UserDto();
+
+		dto.setFirstName("pqr");
+		
+		List<UserDto> list =  service.search(1, 10, dto);
+
+		Iterator it = list.iterator();
+
+		if (it.hasNext()) {
+			dto = (UserDto) it.next();
+			System.out.print(dto.getId());
+			System.out.print("\t" + dto.getFirstName());
+			System.out.print("\t" + dto.getLastName());
+			System.out.print("\t" + dto.getLogin());
+			System.out.println("\t" + dto.getPassword());
+		} else {
+			System.out.println("no record found..!");
+		}
+
 	}
 
 	public void testAdd() throws Exception {
 		UserDto dto = new UserDto();
-		dto.setId(2);
-		dto.setFirstName("abc");
+		dto.setId(3);
+		dto.setFirstName("def");
 		dto.setLastName("xyz");
-		dto.setLogin("admin22");
+		dto.setLogin("admin112");
 		dto.setPassword("123");
 		long pk = service.add(dto);
 
