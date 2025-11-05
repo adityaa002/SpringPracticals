@@ -77,7 +77,7 @@ public class UserDaoJdbcImpl implements UserDaoInt {
 
 	public List<UserDto> search(int pageNo, int pageSize, UserDto dto) throws Exception {
 
-		ArrayList<UserDto> list = new ArrayList<UserDto>();
+		List<UserDto> list = new ArrayList<UserDto>();
 
 		StringBuffer sql = new StringBuffer("select * from st_user where 1=1");
 
@@ -98,13 +98,11 @@ public class UserDaoJdbcImpl implements UserDaoInt {
 		System.out.println("Query => " + sql.toString());
 
 		try {
-			dto = jdbcTemplate.queryForObject(sql.toString(), new UserMapper());
+			list = jdbcTemplate.query(sql.toString(), new UserMapper());
 
 		} catch (Exception e) {
 			throw new Exception("record  not found");
 		}
-
-		list.add(dto);
 
 		return list;
 	}
