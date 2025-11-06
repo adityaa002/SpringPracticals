@@ -2,9 +2,12 @@ package in.co.rays.dao;
 
 import java.util.List;
 
+import javax.persistence.criteria.CriteriaBuilder;
+
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.CriteriaQuery;
 import org.hibernate.criterion.Restrictions;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,14 +51,13 @@ public class UserDAOHibImpl implements UserDAOInt {
 		Session session = sessionFactory.getCurrentSession();
 
 		Criteria criteria = session.createCriteria(UserDTO.class);
-		
-		criteria.add(Restrictions.eq("LOGIN", login));
+		criteria.add(Restrictions.eq("login", login));
 
 		List list = criteria.list();
-		
+
 		UserDTO dto = null;
-		
-		if(list.size() > 0) {
+
+		if (list.size() > 0) {
 			dto = (UserDTO) list.get(0);
 		}
 

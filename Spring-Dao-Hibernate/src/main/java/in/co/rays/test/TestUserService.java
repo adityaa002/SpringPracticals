@@ -30,7 +30,7 @@ public class TestUserService {
 
 	private void testFindByLogin() {
 
-		UserDTO dto = userDao.findByLogin("admin");
+		UserDTO dto = userDao.findByLogin("admin12");
 		System.out.print(dto.getId());
 		System.out.print("\t" + dto.getFirstName());
 		System.out.print("\t" + dto.getLastName());
