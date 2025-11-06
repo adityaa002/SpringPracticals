@@ -20,24 +20,24 @@ public class UserServiceImpl implements UserServiceInt {
 		return userDao.add(dto);
 	}
 
+	@Transactional(propagation = Propagation.REQUIRED)
 	public void update(UserDTO dto) {
-		// TODO Auto-generated method stub
-
+		userDao.update(dto);
 	}
 
+	@Transactional(propagation = Propagation.REQUIRED)
 	public void delete(UserDTO dto) {
-		// TODO Auto-generated method stub
-
+		userDao.delete(dto);
 	}
 
+	@Transactional(readOnly = true)
 	public UserDTO findByPk(long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return userDao.findByPk(id);
 	}
 
+	@Transactional(readOnly = true)
 	public UserDTO findByLogin(String login) {
-		// TODO Auto-generated method stub
-		return null;
+		return userDao.findByLogin(login);
 	}
 
 	public UserDTO authenticate(String login, String password) {
