@@ -3,7 +3,6 @@ package in.co.rays.dao;
 import java.util.List;
 
 import org.hibernate.Criteria;
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
@@ -50,6 +49,16 @@ public class UserDAOHibImpl implements UserDAOInt {
 
 		Criteria criteria = session.createCriteria(UserDTO.class);
 		
+		criteria.add(Restrictions.eq("LOGIN", login));
+
+		List list = criteria.list();
+		
+		UserDTO dto = null;
+		
+		if(list.size() > 0) {
+			dto = (UserDTO) list.get(0);
+		}
+
 		return dto;
 
 	}
