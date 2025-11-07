@@ -24,9 +24,16 @@ public class TestUserService {
 //		 service.testAdd();
 //		 service.testUpdate();
 //		 service.testDelete();
-//		 service.testFindByPk();
+		 service.testFindByPk();
 //		 service.testFindByLogin();
 //		service.testAuth();
+		 service.testSearch();
+	}
+
+	private void testSearch() {
+		
+		
+		
 	}
 
 	public void testAuth() {
@@ -81,10 +88,10 @@ public class TestUserService {
 	public void testAdd() {
 
 		UserDTO dto = new UserDTO();
-		// dto.setId(2L);
-		dto.setFirstName("abc");
-		dto.setLastName("xyz");
-		dto.setLogin("admin");
+		 dto.setId(2L);
+		dto.setFirstName("aditya");
+		dto.setLastName("sharma");
+		dto.setLogin("aditya@gmail.com");
 		dto.setPassword("pass123");
 		userService.add(dto);
 
