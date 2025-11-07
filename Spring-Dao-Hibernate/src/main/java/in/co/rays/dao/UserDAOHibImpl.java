@@ -79,7 +79,7 @@ public class UserDAOHibImpl implements UserDAOInt {
 		list = criteria.list();
 
 		if (list.size() > 0) {
-			dto = (UserDTO) list.get(0);
+			dto = (UserDTO) list.get(1);
 		}
 
 		return dto;
