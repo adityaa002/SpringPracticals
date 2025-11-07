@@ -30,14 +30,16 @@ public class TestUserService {
 //		 service.testFindByPk();
 //		service.testFindByLogin();
 //		service.testAuth();
-//		service.testSearch();
+		service.testSearch();
 	}
 
 	private void testSearch() {
 
-		UserDTO dto = null;
-		List list = userService.search(dto, 0, 5);
+		UserDTO dto = new UserDTO();
 
+		dto.setFirstName("amit");
+		List list = userService.search(dto, 1, 5);
+		System.out.println("error traced");
 		Iterator it = list.iterator();
 
 		while (it.hasNext()) {
