@@ -40,9 +40,10 @@ public class UserServiceImpl implements UserServiceInt {
 		return userDao.findByLogin(login);
 	}
 
+	@Transactional(readOnly = true)
 	public UserDTO authenticate(String login, String password) {
-		// TODO Auto-generated method stub
-		return null;
+		return userDao.authenticate(login, password);
+
 	}
 
 }

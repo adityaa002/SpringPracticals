@@ -13,7 +13,7 @@ import in.co.rays.service.UserServiceInt;
 public class TestUserService {
 
 	@Autowired
-	private UserServiceInt userDao;
+	private UserServiceInt userService;
 
 	public static void main(String[] args) {
 
@@ -21,26 +21,40 @@ public class TestUserService {
 
 		TestUserService service = context.getBean(TestUserService.class);
 
-		// service.testAdd();
-		// service.testUpdate();
-		// service.testDelete();
-		// service.testFindByPk();
-		service.testFindByLogin();
+//		 service.testAdd();
+//		 service.testUpdate();
+//		 service.testDelete();
+//		 service.testFindByPk();
+//		 service.testFindByLogin();
+//		service.testAuth();
+	}
+
+	public void testAuth() {
+		UserDTO dto = userService.authenticate("admin", "pass123");
+		if (dto != null) {
+			System.out.print(dto.getId());
+			System.out.print("\t" + dto.getFirstName());
+			System.out.print("\t" + dto.getLastName());
+			System.out.print("\t" + dto.getLogin());
+			System.out.println("\t" + dto.getPassword());
+		} else {
+			System.out.println("user not found");
+		}
 	}
 
 	private void testFindByLogin() {
 
-		UserDTO dto = userDao.findByLogin("admin12");
+		UserDTO dto = userService.findByLogin("admin12");
 		System.out.print(dto.getId());
 		System.out.print("\t" + dto.getFirstName());
 		System.out.print("\t" + dto.getLastName());
 		System.out.print("\t" + dto.getLogin());
 		System.out.println("\t" + dto.getPassword());
-		
+
 	}
 
 	private void testFindByPk() {
-		UserDTO dto = userDao.findByPk(3L);
+		UserDTO dto = userService.findByPk(3L);
 
 		System.out.print(dto.getId());
 		System.out.print("\t" + dto.getFirstName());
@@ -53,14 +67,14 @@ public class TestUserService {
 	private void testDelete() {
 		UserDTO dto = new UserDTO();
 		dto.setId(2L);
-		userDao.delete(dto);
+		userService.delete(dto);
 	}
 
 	private void testUpdate() {
 		UserDTO dto = new UserDTO();
 		dto.setFirstName("def");
 		dto.setId(1);
-		userDao.update(dto);
+		userService.update(dto);
 
 	}
 
@@ -72,7 +86,7 @@ public class TestUserService {
 		dto.setLastName("xyz");
 		dto.setLogin("admin");
 		dto.setPassword("pass123");
-		userDao.add(dto);
+		userService.add(dto);
 
 	}
 
