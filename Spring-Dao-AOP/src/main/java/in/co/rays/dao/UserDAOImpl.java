@@ -1,9 +1,12 @@
 package in.co.rays.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -49,19 +52,72 @@ public class UserDAOImpl implements UserDAOInt {
 		return dto;
 	}
 
-	public UserDTO findByLogin() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	public UserDTO findByLogin(String login) {
-		// TODO Auto-generated method stub
-		return null;
+
+		Session session = sessionFactory.getCurrentSession();
+
+		Criteria criteria = session.createCriteria(UserDTO.class);
+
+		criteria.add(Restrictions.like("login", login));
+
+		List list = new ArrayList();
+
+		list = criteria.list();
+
+		UserDTO dto = null;
+
+		if (list.size() > 0) {
+			dto = (UserDTO) list.get(0);
+		}
+		return dto;
+
 	}
 
 	public List<UserDTO> search(UserDTO dto, int pageNo, int pageSize) {
-		// TODO Auto-generated method stub
-		return null;
+		Session session = sessionFactory.getCurrentSession();
+		Criteria criteria = session.createCriteria(UserDTO.class);
+
+		if (dto != null) {
+			if (dto.getFirstName() != null && dto.getFirstName().length() > 0) {
+				criteria.add(Restrictions.like("firstName", dto.getFirstName()));
+			}
+			if (dto.getLogin() != null && dto.getLogin().length() > 0) {
+				criteria.add(Restrictions.like("login", dto.getLogin()));
+			}
+			if (dto.getPassword() != null && dto.getPassword().length() > 0) {
+				criteria.add(Restrictions.like("password", dto.getPassword()));
+			}
+		}
+		if (pageSize > 0) {
+			pageNo = (pageNo - 1) * pageSize;
+			criteria.setFirstResult(pageNo);
+			criteria.setMaxResults(pageSize);
+		}
+
+		return criteria.list();
+	}
+
+	public UserDTO authenticate(String login, String password) {
+
+		List list = null;
+		UserDTO dto = null;
+
+		Session session = sessionFactory.getCurrentSession();
+
+		Criteria criteria = session.createCriteria(UserDTO.class);
+
+		criteria.add(Restrictions.like("login", login));
+		criteria.add(Restrictions.like("password", password));
+
+		list = criteria.list();
+
+		if (list.size() > 0) {
+
+			dto = (UserDTO) list.get(0);
+
+		}
+
+		return dto;
 	}
 
 }
