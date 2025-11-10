@@ -17,9 +17,17 @@ public class UserDTO {
 	@GenericGenerator(name = "ncsPK", strategy = "native")
 	@Column(name = "ID", unique = true, nullable = false)
 	private long id;
+
+	@Column(name = "FIRST_NAME")
 	private String firstName;
+
+	@Column(name = "LAST_NAME")
 	private String lastName;
+
+	@Column(name = "LOGIN")
 	private String login;
+
+	@Column(name = "PASSWORD")
 	private String password;
 
 }
