@@ -51,7 +51,7 @@
 
 	<aop:config>
 		<aop:pointcut id="serviceOperations"
-			expression="execution(* com.rays.service.*ServiceImpl.*(..))" />
+			expression="execution(* in.co.rays.service.*ServiceImpl.*(..))" />
 
 		<aop:advisor advice-ref="txAdvice"
 			pointcut-ref="serviceOperations" />

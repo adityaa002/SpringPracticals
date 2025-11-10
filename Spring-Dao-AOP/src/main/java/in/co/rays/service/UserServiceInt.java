@@ -6,8 +6,7 @@ import org.springframework.stereotype.Service;
 
 import in.co.rays.dto.UserDTO;
 
-@Service
-public interface UserServiceInt {
+ public interface UserServiceInt {
 
 	public long add(UserDTO dto);
 
