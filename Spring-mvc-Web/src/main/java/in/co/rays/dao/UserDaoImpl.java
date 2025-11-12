@@ -82,4 +82,20 @@ public class UserDaoImpl implements UserDaoInt {
 		return dto;
 	}
 
+	@Override
+	public List search(UserDTO dto, int pageNo, int pageSize) {
+
+		Session session = sessionFactory.getCurrentSession();
+		Criteria criteria = session.createCriteria(UserDTO.class);
+
+		if (dto != null) {
+			if (dto.getFirstName() != null && dto.getFirstName().length() > 0) {
+				criteria.add(Restrictions.like("firstName", dto.getFirstName()));
+
+			}
+		}
+
+		return null;
+	}
+
 }
