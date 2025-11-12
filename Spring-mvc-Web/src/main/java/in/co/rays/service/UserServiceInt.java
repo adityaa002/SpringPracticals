@@ -1,5 +1,7 @@
 package in.co.rays.service;
 
+import java.util.List;
+
 import in.co.rays.dto.UserDTO;
 
 public interface UserServiceInt {
@@ -15,5 +17,7 @@ public interface UserServiceInt {
 	public UserDTO findByLogin(String login);
 
 	public UserDTO authenticate(String login, String password);
+
+	public List<UserDTO> search(UserDTO dto, int pageNo, int pageSize);
 
 }

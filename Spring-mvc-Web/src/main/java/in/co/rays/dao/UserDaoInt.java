@@ -18,6 +18,6 @@ public interface UserDaoInt {
 
 	public UserDTO authenticate(String login, String password);
 
-	public List search(UserDTO dto, int pageNo, int pageSize);
+	public List<UserDTO> search(UserDTO dto, int pageNo, int pageSize);
 
 }
