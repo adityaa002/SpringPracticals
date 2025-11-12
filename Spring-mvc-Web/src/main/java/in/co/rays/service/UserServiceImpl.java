@@ -2,51 +2,53 @@ package in.co.rays.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import in.co.rays.dao.UserDaoInt;
 import in.co.rays.dto.UserDTO;
 
 @Service
+@Transactional
 public class UserServiceImpl implements UserServiceInt {
 
+	@Autowired
 	private UserDaoInt userDao;
 
-	@Override
+	@Transactional(propagation = Propagation.REQUIRED)
 	public long add(UserDTO dto) {
 		// TODO Auto-generated method stub
 		return userDao.add(dto);
 	}
 
-	@Override
+	@Transactional(propagation = Propagation.REQUIRED)
 	public void update(UserDTO dto) {
 		userDao.update(dto);
 	}
 
-	@Override
+	@Transactional(propagation = Propagation.REQUIRED)
 	public void delete(UserDTO dto) {
 		userDao.delete(dto);
 
 	}
 
-	@Override
+	@Transactional(readOnly = true)
 	public UserDTO findByPk(long id) {
 		return userDao.findByPk(id);
 	}
 
-	@Override
 	public UserDTO findByLogin(String login) {
 		// TODO Auto-generated method stub
 		return userDao.findByLogin(login);
 	}
 
-	@Override
 	public UserDTO authenticate(String login, String password) {
 		// TODO Auto-generated method stub
 		return userDao.authenticate(login, password);
 	}
 
-	@Override
 	public List<UserDTO> search(UserDTO dto, int pageNo, int pageSize) {
 		// TODO Auto-generated method stub
 		return userDao.search(dto, pageNo, pageSize);
