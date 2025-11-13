@@ -41,8 +41,8 @@ public class LoginCtl {
 	@PostMapping
 	public String submit(@ModelAttribute("form") LoginForm form, Model model,
 			@RequestParam(required = false) String operation, HttpSession session) {
-
-		if (operation != null && operation.equals("signUp")) {
+				
+ 		if (operation != null && operation.equals("signUp")) {
 			return "redirect:UserRegistrationCtl";
 
 		}
@@ -51,7 +51,7 @@ public class LoginCtl {
 
 		if (dto != null) {
 			session.setAttribute("user", dto);
-			return "WelcomeCtl";
+			return "redirect:WelcomeCtl";
 		}
 
 		return "LoginView";

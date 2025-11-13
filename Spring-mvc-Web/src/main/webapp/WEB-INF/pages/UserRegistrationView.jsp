@@ -41,7 +41,9 @@
 				</tr>
 				<tr>
 					<th></th>
-					<td><input type="submit" name="operation" value="signUp"></td>
+					<td><input type="submit" name="operation" value="signUp">
+					<input type="submit" name="operation" value="signIn">
+					</td>
 				</tr>
 			</table>
 

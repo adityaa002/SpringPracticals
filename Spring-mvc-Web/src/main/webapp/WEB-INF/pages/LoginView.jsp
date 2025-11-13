@@ -11,8 +11,8 @@
 	<%@include file="Header.jsp"%>
 	<sf:form method="post" modelAttribute="form">
 		<div align="center">
-			<h2>Login Page</h2>
-			<h3>${successMessage}</h3>
+			<h2 style="color: gray;">Login Page</h2>
+			<h3 style="color: green;">${successMessage}</h3>
 
 			<table>
 				<tr>
@@ -25,8 +25,8 @@
 				</tr>
 				<tr>
 					<td></td>
-					<td><input type="submit" name="SignIn" value="SignIn">
-						<input type="submit" name="SignUp" value="SignUp"></td>
+					<td><input type="submit" name="operation" value="signIn">
+						<input type="submit" name="operation" value="signUp"></td>
 				</tr>
 			</table>
 		</div>

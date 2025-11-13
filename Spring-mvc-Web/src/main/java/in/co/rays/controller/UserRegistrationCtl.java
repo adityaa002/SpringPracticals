@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import in.co.rays.dto.UserDTO;
@@ -27,7 +28,12 @@ public class UserRegistrationCtl {
 	}
 
 	@PostMapping
-	public String submit(@ModelAttribute("form") UserRegistrationForm form, Model model) {
+	public String submit(@ModelAttribute("form") UserRegistrationForm form, Model model,
+			@RequestParam(required = false) String operation) {
+
+		if (operation.equalsIgnoreCase("signIn")) {
+			return "redirect:LoginCtl";
+		}
 
 		UserDTO dto = new UserDTO();
 

@@ -12,15 +12,22 @@
 </head>
 <body>
 
+	<c:if test="${not empty sessionScope.user }">
+		<h3>Hi ${sessionScope.user.firstName },</h3>
+		<a href="<c:url value = "/UserCtl"/>">Add User</a> |
+		<a href="<c:url value = "/UserCtl/UserList"/>">User List</a> |
+		<a href="<c:url value = "/LoginCtl?operation=logout"/>">Logout</a>
+	</c:if>
+
 
 
 	<c:if test="${empty sessionScope.user }">
 
-		<h3>Hi, Guest !</h3>
+		<h3 style="color: gray;">Hi, Guest !</h3>
 		<a href="<c:url value="/WelcomeCtl" />">Welcome</a> |
 		<a href="<c:url value = "/LoginCtl"/>">Login</a>
 	</c:if>
-	
-<hr>
+
+	<hr>
 </body>
 </html>
