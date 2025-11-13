@@ -11,6 +11,8 @@
 <title>User Registration</title>
 </head>
 <body>
+	<%@include file="Header.jsp"%>
+
 	<sf:form method="post" modelAttribute="form">
 		<div align="center">
 			<h1 style="color: gray;">User Registration</h1>

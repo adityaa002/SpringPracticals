@@ -7,10 +7,17 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<%@ page isELIgnored="false"%>
-
-
-	<h1>${message}</h1>
+	<%@include file="Header.jsp"%>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+	<h1 align="center">${message}</h1>
 
 </body>
 </html>

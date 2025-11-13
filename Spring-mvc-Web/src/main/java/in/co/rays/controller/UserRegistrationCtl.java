@@ -14,7 +14,7 @@ import in.co.rays.form.UserRegistrationForm;
 import in.co.rays.service.UserServiceInt;
 
 @Controller
-@RequestMapping(value = "UserRegistration")
+@RequestMapping(value = "UserRegistrationCtl")
 public class UserRegistrationCtl {
 
 	@Autowired
