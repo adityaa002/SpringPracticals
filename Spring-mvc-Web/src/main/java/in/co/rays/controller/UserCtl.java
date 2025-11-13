@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import in.co.rays.dto.UserDTO;
-import in.co.rays.form.AddUserForm;
+import in.co.rays.form.UserForm;
 import in.co.rays.service.UserServiceInt;
 
 @Controller
@@ -21,20 +21,20 @@ public class UserCtl {
 	public UserServiceInt service;
 
 	@GetMapping
-	public String display(@ModelAttribute("form") AddUserForm form, @RequestParam(required = false) String operation) {
+	public String display(@ModelAttribute("form") UserForm form, @RequestParam(required = false) String operation) {
 		System.out.println("in userCtl display method");
 		return "UserView";
 
 	}
 
 	@PostMapping
-	public String submit(@ModelAttribute("form") AddUserForm form, @RequestParam(required = false) String operation,
+	public String submit(@ModelAttribute("form") UserForm form, @RequestParam(required = false) String operation,
 			Model model) {
-		
+
 		if (operation != null && operation.equalsIgnoreCase("reset")) {
-			
+
 			return "redirect:UserCtl";
-	
+
 		} else if (operation.equalsIgnoreCase("save")) {
 
 			UserDTO dto = new UserDTO();
@@ -49,6 +49,13 @@ public class UserCtl {
 		}
 
 		return "UserView";
+	}
+
+	@GetMapping("UserList")
+	public String display(@ModelAttribute("form") UserForm from, @RequestParam(required = false) ) {
+		
+		return "UserListView";
+
 	}
 
 }
