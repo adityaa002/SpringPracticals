@@ -13,7 +13,7 @@
 			<div align="center">
 				<h1 style="color: gray;">Add User</h1>
 				<h2 style="color: green;">${successMessage}</h2>
-				<h2 style="color: red;">${successMessage}</h2>
+				<h2 style="color: red;">${errorMessage}</h2>
 			</div>
 
 			<table>
@@ -41,8 +41,7 @@
 				<tr>
 					<td></td>
 					<td><input type="submit" name="operation" value="save">
-					<input type="submit" name="operation" value="reset">
-					</td>
+						<input type="submit" name="operation" value="reset"></td>
 				</tr>
 			</table>
 
