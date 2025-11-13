@@ -9,10 +9,10 @@
 <body>
 	<%@include file="Header.jsp"%>
 
-	<div>
+	<div align="center">
 
 		<sf:form method="post" methodParam="form">
-			<h2>User List</h2>
+			<h2 style="color: gray;">User List</h2>
 
 		</sf:form>
 	</div>

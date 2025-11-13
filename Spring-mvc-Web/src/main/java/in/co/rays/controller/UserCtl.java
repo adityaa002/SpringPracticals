@@ -51,9 +51,10 @@ public class UserCtl {
 		return "UserView";
 	}
 
-	@GetMapping("UserList")
-	public String display(@ModelAttribute("form") UserForm from, @RequestParam(required = false) ) {
-		
+	@GetMapping("/UserList")
+	public String display(@ModelAttribute("form") UserForm from, @RequestParam(required = false) String operation,
+			Model model) {
+
 		return "UserListView";
 
 	}
