@@ -40,7 +40,9 @@
 
 				<tr>
 					<td></td>
-					<td><input type="submit" name="operation" value="Save"></td>
+					<td><input type="submit" name="operation" value="Save">
+					<input type="submit" name="operation" value="Reset">
+					</td>
 				</tr>
 			</table>
 
