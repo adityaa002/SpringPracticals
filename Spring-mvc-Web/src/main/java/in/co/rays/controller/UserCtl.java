@@ -26,7 +26,10 @@ public class UserCtl {
 	}
 
 	@PostMapping
-	public String submit() {
+	public String submit(@ModelAttribute("form") AddUserForm form, @RequestParam(required = false) String operation) {
+		if (operation != null && operation.equalsIgnoreCase("reset")) {
+
+		}
 		return null;
 
 	}
