@@ -73,7 +73,7 @@ public class UserCtl {
 	public String submit(@ModelAttribute("form") UserForm form, Model model, @RequestParam String operation) {
 
 		if(operation.equalsIgnoreCase("add")) {
-			return "redirect:UserCtl";
+			return "redirect:/UserCtl";
 		}
 		
 		return "UserListView";
