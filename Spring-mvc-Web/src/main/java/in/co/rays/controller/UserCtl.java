@@ -69,4 +69,15 @@ public class UserCtl {
 
 	}
 
+	@PostMapping("/UserList")
+	public String submit(@ModelAttribute("form") UserForm form, Model model, @RequestParam String operation) {
+
+		if(operation.equalsIgnoreCase("add")) {
+			return "redirect:UserCtl";
+		}
+		
+		return "UserListView";
+
+	}
+
 }
