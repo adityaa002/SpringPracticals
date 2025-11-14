@@ -1,5 +1,7 @@
 package in.co.rays.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -54,6 +56,13 @@ public class UserCtl {
 	@GetMapping("/UserList")
 	public String display(@ModelAttribute("form") UserForm from, @RequestParam(required = false) String operation,
 			Model model) {
+
+		int pageNo = 1;
+		int pageSize = 5;
+
+		List list = service.search(null, pageNo, pageSize);
+
+		model.addAttribute("list", list);
 
 		return "UserListView";
 
