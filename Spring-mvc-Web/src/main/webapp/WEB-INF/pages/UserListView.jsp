@@ -17,8 +17,7 @@
 			<table>
 				<tr>
 					<td><sf:input path="firstName" />&nbsp; &nbsp;</td>
-					<td><input type="submit" name="operation" value="search">
-					</td>
+					<td><input type="submit" name="operation" value="search"></td>
 				</tr>
 			</table>
 			<table style="width: 100%" border="1">

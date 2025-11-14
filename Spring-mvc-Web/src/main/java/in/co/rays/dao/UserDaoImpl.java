@@ -1,5 +1,6 @@
 package in.co.rays.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -87,7 +88,7 @@ public class UserDaoImpl implements UserDaoInt {
 
 		Session session = sessionFactory.openSession();
 		Criteria criteria = session.createCriteria(UserDTO.class);
-		List list = null;
+		List list = new ArrayList();
 		if (dto != null) {
 			if (dto.getFirstName() != null && dto.getFirstName().length() > 0) {
 				criteria.add(Restrictions.like("firstName", dto.getFirstName()));
@@ -102,8 +103,8 @@ public class UserDaoImpl implements UserDaoInt {
 		}
 		if (pageSize > 0) {
 			pageNo = (pageNo - 1) * pageSize;
-			criteria.setMaxResults(pageNo);
-			criteria.setFirstResult(pageSize);
+			criteria.setFirstResult(pageNo);
+			criteria.setMaxResults(pageSize);
 		}
 
 		list = criteria.list();
