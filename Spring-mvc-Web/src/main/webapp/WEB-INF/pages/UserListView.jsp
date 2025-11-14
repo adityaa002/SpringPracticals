@@ -9,13 +9,37 @@
 <body>
 	<%@include file="Header.jsp"%>
 
-	<div align="center">
 
-		<sf:form method="post" methodParam="form">
+	<sf:form method="post" methodParam="form">
+		<div align="center">
 			<h2 style="color: gray;">User List</h2>
 
-		</sf:form>
-	</div>
+			<table style="width: 100%" border="1">
+				<tr>
+					<th>Select</th>
+					<th>S no.</th>
+					<th>First Name</th>
+					<th>Last Name</th>
+					<th>Login</th>
+					<th>DOB</th>
+					<th>Address</th>
+				</tr>
+
+				<c:forEach items="${list}" var="user">
+					<tr>
+						<td><sf:checkbox path="ids" value="${user.id}" /></td>
+						<td><c:out value="${user.id }"></c:out></td>
+
+					</tr>
+
+				</c:forEach>
+
+				<tr>
+				</tr>
+			</table>
+
+		</div>
+	</sf:form>
 
 </body>
 </html>

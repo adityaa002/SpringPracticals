@@ -17,6 +17,8 @@ public class UserForm {
 	private int pageNo;
 
 	private int pageSize;
+	
+	
 
 	private long[] ids;
 
