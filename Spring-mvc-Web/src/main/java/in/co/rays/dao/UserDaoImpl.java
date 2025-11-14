@@ -109,8 +109,6 @@ public class UserDaoImpl implements UserDaoInt {
 
 		list = criteria.list();
 
-		System.out.println("UserDao search method" + list.toString());
-
 		return list;
 
 	}

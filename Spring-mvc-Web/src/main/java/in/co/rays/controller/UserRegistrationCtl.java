@@ -33,6 +33,8 @@ public class UserRegistrationCtl {
 
 		if (operation.equalsIgnoreCase("signIn")) {
 			return "redirect:LoginCtl";
+		} else if (operation.equalsIgnoreCase("reset")) {
+			return "redirect:UserRegistrationCtl";
 		}
 
 		UserDTO dto = new UserDTO();

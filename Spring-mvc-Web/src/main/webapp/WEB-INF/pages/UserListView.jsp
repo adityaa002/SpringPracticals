@@ -11,11 +11,12 @@
 	<div align="center">
 		<sf:form method="post" modelAttribute="form">
 			<h2>User List</h2>
-			<h2 style="color: red">${errorMsg}</h2>
-			<h2 style="color: green">${successMsg}</h2>
+			<h2 style="color: red">${errorMessage}</h2>
+			<h2 style="color: green">${successMessage}</h2>
 			<sf:hidden path="pageNo" />
 			<table>
 				<tr>
+				<td>First Name :</td>
 					<td><sf:input path="firstName" />&nbsp; &nbsp;</td>
 					<td><input type="submit" name="operation" value="search"></td>
 				</tr>
@@ -50,6 +51,8 @@
 				<tr>
 					<td style="width: 30%"><input type="submit" name="operation"
 						value="previous" ${form.pageNo == 1 ? 'disabled="disabled"' : ''} /></td>
+					<td align="center"><input type="submit" name="operation"
+						value="add"></td>
 					<td align="center"><input type="submit" name="operation"
 						value="delete"></td>
 					<td style="text-align: right;"><input type="submit"
