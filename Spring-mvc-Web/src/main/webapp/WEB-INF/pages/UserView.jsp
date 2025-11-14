@@ -11,7 +11,15 @@
 	<div align="center">
 		<sf:form method="post" modelAttribute="form">
 			<div align="center">
-				<h1 style="color: gray;">Add User</h1>
+
+				<c:if test="${form.id }>0">
+					<h1 style="color: gray;">Update User</h1>
+				</c:if>
+
+				<c:if test="${form.id}==0">
+					<h1 style="color: gray;">Add User</h1>
+				</c:if>
+
 				<h2 style="color: green;">${successMessage}</h2>
 				<h2 style="color: red;">${errorMessage}</h2>
 			</div>
