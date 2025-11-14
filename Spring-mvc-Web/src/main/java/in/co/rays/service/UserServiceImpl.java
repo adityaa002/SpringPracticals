@@ -49,6 +49,7 @@ public class UserServiceImpl implements UserServiceInt {
 		return userDao.authenticate(login, password);
 	}
 
+	@Transactional(readOnly = true)
 	public List<UserDTO> search(UserDTO dto, int pageNo, int pageSize) {
 		// TODO Auto-generated method stub
 		return userDao.search(dto, pageNo, pageSize);

@@ -67,7 +67,7 @@ public class UserDaoImpl implements UserDaoInt {
 
 	@Override
 	public UserDTO authenticate(String login, String password) {
-		Session session = sessionFactory.getCurrentSession();
+		Session session = sessionFactory.openSession();
 		Criteria criteria = session.createCriteria(UserDTO.class);
 
 		criteria.add(Restrictions.like("login", login));
@@ -85,9 +85,9 @@ public class UserDaoImpl implements UserDaoInt {
 	@Override
 	public List<UserDTO> search(UserDTO dto, int pageNo, int pageSize) {
 
-		Session session = sessionFactory.getCurrentSession();
+		Session session = sessionFactory.openSession();
 		Criteria criteria = session.createCriteria(UserDTO.class);
-
+		List list = null;
 		if (dto != null) {
 			if (dto.getFirstName() != null && dto.getFirstName().length() > 0) {
 				criteria.add(Restrictions.like("firstName", dto.getFirstName()));
@@ -106,7 +106,12 @@ public class UserDaoImpl implements UserDaoInt {
 			criteria.setFirstResult(pageSize);
 		}
 
-		return criteria.list();
+		list = criteria.list();
+
+		System.out.println("UserDao search method" + list.toString());
+
+		return list;
+
 	}
 
 }

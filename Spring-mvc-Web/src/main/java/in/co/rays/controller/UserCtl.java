@@ -54,13 +54,14 @@ public class UserCtl {
 	}
 
 	@GetMapping("/UserList")
-	public String display(@ModelAttribute("form") UserForm from, @RequestParam(required = false) String operation,
-			Model model) {
+	public String display(@ModelAttribute("form") UserForm form, Model model) {
 
 		int pageNo = 1;
 		int pageSize = 5;
 
 		List list = service.search(null, pageNo, pageSize);
+		System.out.println("Userctl display method list size : " + list.size());
+		form.setPageNo(pageNo);
 
 		model.addAttribute("list", list);
 
