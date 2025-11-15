@@ -3,9 +3,12 @@ package in.co.rays.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,21 +27,16 @@ public class UserCtl {
 	public UserServiceInt service;
 
 	@GetMapping
-	public String display(@ModelAttribute("form") UserForm form, @RequestParam(required = false) String operation) {
+	public String display(@ModelAttribute("form") UserForm form, @RequestParam(required = false) Long id) {
 
-		long id = form.getId();
-		UserDTO dto = null;
-
-		if (id > 0) {
-
-			dto = service.findByPk(id);
-
+		if (id != null && id > 0) {
+			UserDTO dto = service.findByPk(id);
+			form.setId(dto.getId());
 			form.setFirstName(dto.getFirstName());
 			form.setLastName(dto.getLastName());
 			form.setLogin(dto.getLogin());
 			form.setPassword(dto.getPassword());
 			form.setAddress(dto.getAddress());
-
 		}
 
 		System.out.println("in userCtl display method");
@@ -47,30 +45,36 @@ public class UserCtl {
 	}
 
 	@PostMapping
-	public String submit(@ModelAttribute("form") UserForm form, @RequestParam(required = false) String operation,
-			Model model) {
+	public String submit(@ModelAttribute("form") @Valid UserForm form, @RequestParam(required = false) String operation,
+			BindingResult bindingResult, Model model) {
 		System.out.println("Operation : " + operation);
 
-		if (operation != null && operation.equalsIgnoreCase("reset")) {
+		if (bindingResult.hasErrors()) {
 
-			return "redirect:UserCtl";
-
-		} else if (operation != null && operation.equalsIgnoreCase("cancel")) {
-			return "UserListView";
-
+			return "UserView";
 		}
 
-		else if (operation.equalsIgnoreCase("save")) {
+		UserDTO dto = new UserDTO();
 
-			UserDTO dto = new UserDTO();
-			dto.setFirstName(form.getFirstName());
-			dto.setLastName(form.getLastName());
-			dto.setLogin(form.getLogin());
-			dto.setPassword(form.getPassword());
+		dto.setId(form.getId());
+		dto.setFirstName(form.getFirstName());
+		dto.setLastName(form.getLastName());
+		dto.setLogin(form.getLogin());
+		dto.setPassword(form.getPassword());
+		dto.setAddress(form.getAddress());
 
-			long id = service.add(dto);
-			model.addAttribute("successMessage", "User Added Successfully..!");
+		if (operation != null && operation.equalsIgnoreCase("update")) {
+			service.update(dto);
+			model.addAttribute("successMessage", "Record Updated Successfully");
 
+		} else if (operation != null && operation.equalsIgnoreCase("save")) {
+
+			service.add(dto);
+			model.addAttribute("successMessage", "Record added successfully");
+
+		} else if (operation != null && operation.equalsIgnoreCase("cancel")) {
+
+			return "redirect:UserCtl/UserList";
 		}
 
 		return "UserView";

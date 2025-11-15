@@ -17,7 +17,7 @@
 			<table>
 				<tr>
 					<th>Login Id :</th>
-					<td><sf:input path="login" placeholder="enter login id" /></td>
+					<td><sf:input path="login" placeholder="enter login id" />  </td>
 					<td style="color: red"><sf:errors path="login" /></td>
 				</tr>
 				<tr>

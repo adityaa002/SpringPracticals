@@ -43,14 +43,14 @@ public class LoginCtl {
 	@PostMapping
 	public String submit(@ModelAttribute("form") @Valid LoginForm form, BindingResult bindingResult, Model model,
 			@RequestParam(required = false) String operation, HttpSession session) {
-
-		if (operation != null && operation.equals("signUp")) {
-			return "redirect:UserRegistrationCtl";
-
-		}
-
 		if (bindingResult.hasErrors()) {
-			return "UserView";
+			
+			if (operation != null && operation.equals("signUp")) {
+				return "redirect:UserRegistrationCtl";
+
+			}
+
+			return "LoginView";
 		}
 
 		UserDTO dto = service.authenticate(form.getLogin(), form.getPassword());

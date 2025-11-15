@@ -47,7 +47,7 @@
 				</tr>
 
 				<tr>
-					<c:if test="${form.id==0 }">
+				<c:if test="${form.id ==0}">
 						<td></td>
 
 						<td><input type="submit" name="operation" value="save">
