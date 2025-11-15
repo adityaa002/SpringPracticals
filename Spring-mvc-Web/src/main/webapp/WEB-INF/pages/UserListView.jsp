@@ -16,17 +16,21 @@
 			<sf:hidden path="pageNo" />
 			<table>
 				<tr>
-				<td>First Name :</td>
-					<td><sf:input path="firstName" />&nbsp; &nbsp;</td>
+					<td>First Name :</td>
+					<td><sf:input path="firstName" placeholder="Enter your name " />&nbsp;
+						&nbsp;</td>
+					<td>Login id :</td>
+					<td><sf:input path="login" placeholder="Enter your email id" />&emsp;</td>
 					<td><input type="submit" name="operation" value="search"></td>
+					<td><input type="submit" name="operation" value="reset"></td>
 				</tr>
 			</table>
 			<table style="width: 100%" border="1">
 				<tr>
 					<th>Select</th>
 					<th>ID</th>
-					<th>FirstName</th>
-					<th>LastName</th>
+					<th>First Name</th>
+					<th>Last Name</th>
 					<th>Login</th>
 					<th>Password</th>
 					<th>Address</th>

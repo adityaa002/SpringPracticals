@@ -90,15 +90,16 @@ public class UserDaoImpl implements UserDaoInt {
 		Criteria criteria = session.createCriteria(UserDTO.class);
 		List list = new ArrayList();
 		if (dto != null) {
+
 			if (dto.getFirstName() != null && dto.getFirstName().length() > 0) {
-				criteria.add(Restrictions.like("firstName", dto.getFirstName()));
+				criteria.add(Restrictions.ilike("firstName", "%" + dto.getFirstName() + "%"));
 
 			}
 			if (dto.getLogin() != null && dto.getLogin().length() > 0) {
-				criteria.add(Restrictions.like("login", dto.getLogin()));
+				criteria.add(Restrictions.ilike("login", "%" + dto.getLogin() + "%"));
 			}
 			if (dto.getPassword() != null && dto.getPassword().length() > 0) {
-				criteria.add(Restrictions.like("password", dto.getPassword()));
+				criteria.add(Restrictions.ilike("password", "%" + dto.getPassword() + "%"));
 			}
 		}
 		if (pageSize > 0) {

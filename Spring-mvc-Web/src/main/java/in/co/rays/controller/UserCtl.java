@@ -73,10 +73,11 @@ public class UserCtl {
 	@PostMapping("/UserList")
 	public String submit(@ModelAttribute("form") UserForm form, Model model, @RequestParam String operation) {
 
+		UserDTO dto = null;
+
 		int pageNo = 1;
 		int pageSize = 5;
-		List list = new ArrayList();
-		UserDTO dto = null;
+		System.out.println("operation ==> " + operation);
 
 		if (operation != null && operation.equalsIgnoreCase("next")) {
 
@@ -97,11 +98,13 @@ public class UserCtl {
 
 			return "redirect:/UserCtl";
 
+		} else if (operation != null && operation.equalsIgnoreCase("reset")) {
+			return "redirect:/UserList";
 		}
 
-		list = service.search(dto, pageNo, pageSize);
-
 		form.setPageNo(pageNo);
+		List list = service.search(dto, pageNo, pageSize);
+		System.out.println("dto :" + list.size());
 
 		model.addAttribute("list", list);
 
