@@ -25,6 +25,22 @@ public class UserCtl {
 
 	@GetMapping
 	public String display(@ModelAttribute("form") UserForm form, @RequestParam(required = false) String operation) {
+		
+		long id = form.getId();
+		UserDTO dto = null;
+		
+		if (id > 0) {
+
+			dto = service.findByPk(id);
+			System.out.println(id);
+			System.out.println(dto.getFirstName());
+			form.setFirstName(dto.getFirstName());
+			dto.setLastName(form.getLastName());
+			dto.setLogin(form.getLogin());
+			dto.setPassword(form.getPassword());
+
+		}
+
 		System.out.println("in userCtl display method");
 		return "UserView";
 
@@ -99,7 +115,7 @@ public class UserCtl {
 			return "redirect:/UserCtl";
 
 		} else if (operation != null && operation.equalsIgnoreCase("reset")) {
-			return "redirect:/UserList";
+			return "redirect:UserList";
 		}
 
 		form.setPageNo(pageNo);

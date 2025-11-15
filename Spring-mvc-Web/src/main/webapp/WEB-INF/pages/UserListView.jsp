@@ -46,7 +46,7 @@
 						<td><c:out value="${user.password }"></c:out></td>
 						<td><c:out value="${user.address }"></c:out></td>
 						<td align="center"><a
-							href="<c:url value="/User?id=${user.id}" />">edit</a></td>
+							href="<c:url value="/UserCtl?id=${user.id}" />">edit</a></td>
 					</tr>
 				</c:forEach>
 			</table>
