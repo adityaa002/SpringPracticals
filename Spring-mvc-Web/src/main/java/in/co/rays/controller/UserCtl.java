@@ -1,5 +1,6 @@
 package in.co.rays.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,22 +75,31 @@ public class UserCtl {
 
 		int pageNo = 1;
 		int pageSize = 5;
+		List list = new ArrayList();
+		UserDTO dto = null;
 
-		if (operation.equalsIgnoreCase("next")) {
+		if (operation != null && operation.equalsIgnoreCase("next")) {
+
 			pageNo = form.getPageNo();
 			pageNo++;
 
-		}
+		} else if (operation != null && operation.equalsIgnoreCase("previous")) {
 
-		else if (operation.equalsIgnoreCase("add")) {
+			pageNo = form.getPageNo();
+			pageNo--;
+
+		} else if (operation != null && operation.equalsIgnoreCase("search")) {
+			dto = new UserDTO();
+			dto.setFirstName(form.getFirstName());
+			dto.setLogin(form.getLogin());
+
+		} else if (operation != null && operation.equalsIgnoreCase("add")) {
+
 			return "redirect:/UserCtl";
+
 		}
 
-		UserDTO dto = new UserDTO();
-		dto.setFirstName(form.getFirstName());
-		dto.setLogin(form.getLogin());
-
-		List list = service.search(dto, pageNo, pageSize);
+		list = service.search(dto, pageNo, pageSize);
 
 		form.setPageNo(pageNo);
 
