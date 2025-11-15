@@ -76,13 +76,15 @@ public class UserCtl {
 		int pageSize = 5;
 
 		if (operation.equalsIgnoreCase("next")) {
+			pageNo = form.getPageNo();
 			pageNo++;
+
 		}
 
 		else if (operation.equalsIgnoreCase("add")) {
 			return "redirect:/UserCtl";
 		}
-		
+
 		UserDTO dto = new UserDTO();
 		dto.setFirstName(form.getFirstName());
 		dto.setLogin(form.getLogin());
