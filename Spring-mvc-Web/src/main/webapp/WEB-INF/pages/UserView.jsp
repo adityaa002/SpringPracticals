@@ -12,11 +12,11 @@
 		<sf:form method="post" modelAttribute="form">
 			<div align="center">
 
-				<c:if test="${form.id }>0">
+				<c:if test="${form.id > 0}">
 					<h1 style="color: gray;">Update User</h1>
 				</c:if>
 
-				<c:if test="${form.id}==0">
+				<c:if test="${form.id ==0}">
 					<h1 style="color: gray;">Add User</h1>
 				</c:if>
 

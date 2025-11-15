@@ -72,10 +72,27 @@ public class UserCtl {
 	@PostMapping("/UserList")
 	public String submit(@ModelAttribute("form") UserForm form, Model model, @RequestParam String operation) {
 
-		if(operation.equalsIgnoreCase("add")) {
+		int pageNo = 1;
+		int pageSize = 5;
+
+		if (operation.equalsIgnoreCase("next")) {
+			pageNo++;
+		}
+
+		else if (operation.equalsIgnoreCase("add")) {
 			return "redirect:/UserCtl";
 		}
 		
+		UserDTO dto = new UserDTO();
+		dto.setFirstName(form.getFirstName());
+		dto.setLogin(form.getLogin());
+
+		List list = service.search(dto, pageNo, pageSize);
+
+		form.setPageNo(pageNo);
+
+		model.addAttribute("list", list);
+
 		return "UserListView";
 
 	}
