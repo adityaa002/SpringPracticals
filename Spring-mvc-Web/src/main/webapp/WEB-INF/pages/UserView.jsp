@@ -47,9 +47,20 @@
 				</tr>
 
 				<tr>
-					<td></td>
-					<td><input type="submit" name="operation" value="save">
-						<input type="submit" name="operation" value="reset"></td>
+					<c:if test="${form.id==0 }">
+						<td></td>
+
+						<td><input type="submit" name="operation" value="save">
+							<input type="submit" name="operation" value="reset"></td>
+					</c:if>
+
+					<c:if test="${form.id > 0 }">
+						<td></td>
+
+						<td><input type="submit" name="operation" value="update"></td>
+						<td><input type="submit" name="operation" value="cancel"></td>
+					</c:if>
+
 				</tr>
 			</table>
 

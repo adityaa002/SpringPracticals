@@ -1,9 +1,13 @@
 package in.co.rays.form;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class LoginForm {
 
+	@NotEmpty(message = "Enter login id")
 	private String login;
 
+	@NotEmpty(message = "Enter password")
 	private String password;
 
 	public String getLogin() {

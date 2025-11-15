@@ -5,21 +5,27 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import in.co.rays.dto.UserDTO;
 
 public class UserRegistrationForm {
 
-	private long id;
+	protected long id;
 
+	@NotEmpty(message = "first name is required")
 	private String firstName;
 
+	@NotEmpty(message = "last name is required")
 	private String lastName;
 
+	@NotEmpty(message = "login is required")
 	private String login;
 
+	@NotEmpty(message = "password is required")
 	private String password;
 
+	@NotEmpty(message = "address is required")
 	private String address;
 
 	public long getId() {

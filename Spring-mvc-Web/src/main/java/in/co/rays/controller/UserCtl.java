@@ -25,19 +25,19 @@ public class UserCtl {
 
 	@GetMapping
 	public String display(@ModelAttribute("form") UserForm form, @RequestParam(required = false) String operation) {
-		
+
 		long id = form.getId();
 		UserDTO dto = null;
-		
+
 		if (id > 0) {
 
 			dto = service.findByPk(id);
-			System.out.println(id);
-			System.out.println(dto.getFirstName());
+
 			form.setFirstName(dto.getFirstName());
-			dto.setLastName(form.getLastName());
-			dto.setLogin(form.getLogin());
-			dto.setPassword(form.getPassword());
+			form.setLastName(dto.getLastName());
+			form.setLogin(dto.getLogin());
+			form.setPassword(dto.getPassword());
+			form.setAddress(dto.getAddress());
 
 		}
 
@@ -49,12 +49,18 @@ public class UserCtl {
 	@PostMapping
 	public String submit(@ModelAttribute("form") UserForm form, @RequestParam(required = false) String operation,
 			Model model) {
+		System.out.println("Operation : " + operation);
 
 		if (operation != null && operation.equalsIgnoreCase("reset")) {
 
 			return "redirect:UserCtl";
 
-		} else if (operation.equalsIgnoreCase("save")) {
+		} else if (operation != null && operation.equalsIgnoreCase("cancel")) {
+			return "UserListView";
+
+		}
+
+		else if (operation.equalsIgnoreCase("save")) {
 
 			UserDTO dto = new UserDTO();
 			dto.setFirstName(form.getFirstName());
