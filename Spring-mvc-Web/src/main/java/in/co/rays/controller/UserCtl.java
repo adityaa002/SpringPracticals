@@ -80,14 +80,15 @@ public class UserCtl {
 		return "UserView";
 	}
 
-	@GetMapping("/ctl/UserList")
+	@GetMapping("/search")
 	public String display(@ModelAttribute("form") UserForm form, Model model) {
 
 		int pageNo = 1;
 		int pageSize = 5;
 
+		
 		List list = service.search(null, pageNo, pageSize);
-		System.out.println("Userctl display method list size : " + list.size());
+				
 		form.setPageNo(pageNo);
 
 		model.addAttribute("list", list);
@@ -96,7 +97,7 @@ public class UserCtl {
 
 	}
 
-	@PostMapping("/UserList")
+	@PostMapping("/search")
 	public String submit(@ModelAttribute("form") UserForm form, Model model, @RequestParam String operation) {
 
 		UserDTO dto = null;
