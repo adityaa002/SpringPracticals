@@ -30,6 +30,7 @@ public class UserCtl {
 	public String display(@ModelAttribute("form") UserForm form, @RequestParam(required = false) Long id) {
 
 		if (id != null && id > 0) {
+			
 			UserDTO dto = service.findByPk(id);
 			form.setId(dto.getId());
 			form.setFirstName(dto.getFirstName());
@@ -37,6 +38,7 @@ public class UserCtl {
 			form.setLogin(dto.getLogin());
 			form.setPassword(dto.getPassword());
 			form.setAddress(dto.getAddress());
+			
 		}
 
 		System.out.println("in userCtl display method");
@@ -51,6 +53,10 @@ public class UserCtl {
 		System.out.println("Operation : " + operation);
 
 		if (bindingResult.hasErrors()) {
+			
+			if(operation.equalsIgnoreCase("reset")) {
+				return "redirect:User";
+			}
 
 			return "UserView";
 		}

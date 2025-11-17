@@ -26,23 +26,21 @@ public class UserRegistrationCtl {
 
 	@GetMapping
 	public String display(@ModelAttribute("form") UserRegistrationForm form) {
-		
+
 		System.out.println("in get display method");
-		
+
 		return "UserRegistrationView";
 	}
 
 	@PostMapping
-	public String submit(@ModelAttribute("form") @Valid UserRegistrationForm form,BindingResult bindingResult, Model model,
-			@RequestParam(required = false) String operation) {
+	public String submit(@ModelAttribute("form") @Valid UserRegistrationForm form, BindingResult bindingResult,
+			Model model, @RequestParam(required = false) String operation) {
 
-		if (operation.equalsIgnoreCase("signIn")) {
-			return "redirect:Login";
-		} else if (operation.equalsIgnoreCase("reset")) {
+		if (operation.equalsIgnoreCase("reset")) {
 			return "redirect:Register";
 		}
-		
-		if(bindingResult.hasErrors()) {
+
+		if (bindingResult.hasErrors()) {
 			return "UserRegistrationView";
 		}
 

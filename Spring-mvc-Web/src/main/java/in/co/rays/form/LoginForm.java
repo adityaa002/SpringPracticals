@@ -1,13 +1,18 @@
 package in.co.rays.form;
 
+import javax.validation.constraints.Pattern;
+
+import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
 public class LoginForm {
 
 	@NotEmpty(message = "Enter login id")
+	@Email
 	private String login;
 
 	@NotEmpty(message = "Enter password")
+	@Pattern(regexp = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,12}", message = "Minimum eight characters, at least one letter and one number:")
 	private String password;
 
 	public String getLogin() {

@@ -25,7 +25,7 @@
 
 		<h3 style="color: gray;">Hi, Guest !</h3>
 		<a href="<c:url value="/WelcomeCtl" />">Welcome</a> |
-		<a href="<c:url value = "/LoginCtl"/>">Login</a>
+		<a href="<c:url value = "/Login"/>">Login</a>
 	</c:if>
 
 	<hr>
