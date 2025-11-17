@@ -52,12 +52,12 @@ public class UserCtl {
 
 		System.out.println("Operation : " + operation);
 
-		if ( "reset".equalsIgnoreCase(operation)) {
+		if ("reset".equalsIgnoreCase(operation)) {
 			System.out.println("Got reset as operation..!");
 			return "redirect:/ctl/User";
-			
-			
-		} else if ("cancel".equalsIgnoreCase(operation)) {
+
+		}
+		if ("cancel".equalsIgnoreCase(operation)) {
 
 			System.out.println("Got cancel as operation..!");
 			return "redirect:/ctl/User/search";
@@ -78,15 +78,23 @@ public class UserCtl {
 		dto.setPassword(form.getPassword());
 		dto.setAddress(form.getAddress());
 
-		if (form.getId() > 0) {
+		if ("update".equalsIgnoreCase(operation)) {
+			
 			service.update(dto);
+			
 			model.addAttribute("successMessage", "Record Updated Successfully");
-		} else {
+			
+		} else if("save".equalsIgnoreCase(operation)){
+			
 			try {
 				service.add(dto);
+				
 				model.addAttribute("successMessage", "Record Added Successfully");
+				
 			} catch (Exception e) {
+				
 				model.addAttribute("errorMessage", e.getMessage());
+				
 				e.printStackTrace();
 			}
 		}
@@ -120,6 +128,15 @@ public class UserCtl {
 		int pageSize = 5;
 
 		System.out.println("operation ==> " + operation);
+		
+		if (operation != null && operation.equalsIgnoreCase("add")) {
+			return "redirect:/ctl/User";
+
+		}
+		if (operation != null && operation.equalsIgnoreCase("reset")) {
+			return "redirect:/ctl/User/search";
+
+		}
 
 		if (operation != null && operation.equalsIgnoreCase("next")) {
 
@@ -133,28 +150,23 @@ public class UserCtl {
 			pageNo--;
 
 		}
-		
+
 		if (operation != null && operation.equalsIgnoreCase("search")) {
 			dto = new UserDTO();
 			dto.setFirstName(form.getFirstName());
 			dto.setLogin(form.getLogin());
 
 		}
-		if (operation != null && operation.equalsIgnoreCase("add")) {
-			return "redirect:/ctl/User";
-
-		}
-		if (operation != null && operation.equalsIgnoreCase("reset")) {
-			return "redirect:/ctl/User/search";
-			
-		}
+		
 
 		if (operation != null && operation.equalsIgnoreCase("delete")) {
 			if (form.getIds() != null && form.getIds().length > 0) {
 				for (long id : form.getIds()) {
 					UserDTO deleteDto = new UserDTO();
 					deleteDto.setId(id);
-					service.delete(dto);
+					service.delete(deleteDto);
+		            model.addAttribute("successMessage", "Record(s) deleted successfully");
+
 				}
 
 			} else {

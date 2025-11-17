@@ -19,7 +19,7 @@
 
 	<div align="center">
 		<h1>
-		<a href="/WEB-INF/pages/WelcomeCtl">Welcome to your spring..!</a>
+		<a href="WelcomeCtl">Welcome to your spring..!</a>
  			
 		</h1>
 	</div>

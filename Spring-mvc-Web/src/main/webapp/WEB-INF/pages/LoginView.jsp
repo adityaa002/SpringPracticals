@@ -13,6 +13,7 @@
 		<div align="center">
 			<h2 style="color: gray;">Login Page</h2>
 			<h3 style="color: green;">${successMessage}</h3>
+			<h3 style="color: red;">${errorMessage}</h3>
 
 			<table>
 				<tr>
