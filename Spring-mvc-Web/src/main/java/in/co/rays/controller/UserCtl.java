@@ -80,7 +80,7 @@ public class UserCtl {
 		return "UserView";
 	}
 
-	@GetMapping("/UserList")
+	@GetMapping("/ctl/UserList")
 	public String display(@ModelAttribute("form") UserForm form, Model model) {
 
 		int pageNo = 1;
@@ -96,7 +96,7 @@ public class UserCtl {
 
 	}
 
-	@PostMapping("/UserList")
+	@PostMapping("/ctl/UserList")
 	public String submit(@ModelAttribute("form") UserForm form, Model model, @RequestParam String operation) {
 
 		UserDTO dto = null;
@@ -122,7 +122,7 @@ public class UserCtl {
 
 		} else if (operation != null && operation.equalsIgnoreCase("add")) {
 
-			return "redirect:/UserCtl";
+			return "redirect:/ctl/UserCtl";
 
 		} else if (operation != null && operation.equalsIgnoreCase("reset")) {
 			return "redirect:UserList";
