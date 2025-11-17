@@ -10,7 +10,7 @@
 	<%@ include file="Header.jsp"%>
 	<div align="center">
 		<sf:form method="post" modelAttribute="form">
-			<h2>User List</h2>
+			<h1 style="color: gray;">User List</h1>
 			<h2 style="color: red">${errorMessage}</h2>
 			<h2 style="color: green">${successMessage}</h2>
 			<sf:hidden path="pageNo" />
@@ -46,7 +46,7 @@
 						<td><c:out value="${user.password }"></c:out></td>
 						<td><c:out value="${user.address }"></c:out></td>
 						<td align="center"><a
-							href="<c:url value="/UserCtl?id=${user.id}" />">edit</a></td>
+							href="<c:url value="/ctl/User?id=${user.id}" />">edit</a></td>
 					</tr>
 				</c:forEach>
 			</table>

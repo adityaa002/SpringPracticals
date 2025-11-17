@@ -23,7 +23,7 @@ public class FrontCtl extends HandlerInterceptorAdapter {
 
 		if (session.getAttribute("user") == null) {
 			request.setAttribute("errorMessage", "Session Expired..! Please Login Again");
-			RequestDispatcher rd = request.getRequestDispatcher("/LoginCtl");
+			RequestDispatcher rd = request.getRequestDispatcher("/Login");
 			rd.forward(request, response);
 
 			return false;

@@ -48,17 +48,16 @@ public class LoginCtl {
 
 		}
 
-		
-		  if (bindingResult.hasErrors()) {
-		  
-		  return "LoginView"; }
-		 
+		if (bindingResult.hasErrors()) {
+
+			return "LoginView";
+		}
 
 		UserDTO dto = service.authenticate(form.getLogin(), form.getPassword());
 
 		if (dto != null) {
 			session.setAttribute("user", dto);
-			return "redirect:WelcomeCtl";
+			return "redirect:/WelcomeCtl";
 		}
 
 		return "LoginView";

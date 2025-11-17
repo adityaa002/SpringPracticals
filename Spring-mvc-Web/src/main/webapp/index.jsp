@@ -19,7 +19,8 @@
 
 	<div align="center">
 		<h1>
-			<h2>Hello Spring..!</h2>
+		<a href="/WEB-INF/pages/WelcomeCtl">Welcome to your spring..!</a>
+ 			
 		</h1>
 	</div>
 	</a>

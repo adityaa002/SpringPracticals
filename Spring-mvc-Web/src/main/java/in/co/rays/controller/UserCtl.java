@@ -30,7 +30,7 @@ public class UserCtl {
 	public String display(@ModelAttribute("form") UserForm form, @RequestParam(required = false) Long id) {
 
 		if (id != null && id > 0) {
-			
+
 			UserDTO dto = service.findByPk(id);
 			form.setId(dto.getId());
 			form.setFirstName(dto.getFirstName());
@@ -38,7 +38,7 @@ public class UserCtl {
 			form.setLogin(dto.getLogin());
 			form.setPassword(dto.getPassword());
 			form.setAddress(dto.getAddress());
-			
+
 		}
 
 		System.out.println("in userCtl display method");
@@ -52,11 +52,19 @@ public class UserCtl {
 
 		System.out.println("Operation : " + operation);
 
-		if (bindingResult.hasErrors()) {
+		if ( "reset".equalsIgnoreCase(operation)) {
+			System.out.println("Got reset as operation..!");
+			return "redirect:/ctl/User";
 			
-			if(operation.equalsIgnoreCase("reset")) {
-				return "redirect:User";
-			}
+			
+		} else if ("cancel".equalsIgnoreCase(operation)) {
+
+			System.out.println("Got cancel as operation..!");
+			return "redirect:/ctl/User/search";
+
+		}
+
+		if (bindingResult.hasErrors()) {
 
 			return "UserView";
 		}
@@ -125,11 +133,20 @@ public class UserCtl {
 			pageNo--;
 
 		}
+		
 		if (operation != null && operation.equalsIgnoreCase("search")) {
 			dto = new UserDTO();
 			dto.setFirstName(form.getFirstName());
 			dto.setLogin(form.getLogin());
 
+		}
+		if (operation != null && operation.equalsIgnoreCase("add")) {
+			return "redirect:/ctl/User";
+
+		}
+		if (operation != null && operation.equalsIgnoreCase("reset")) {
+			return "redirect:/ctl/User/search";
+			
 		}
 
 		if (operation != null && operation.equalsIgnoreCase("delete")) {

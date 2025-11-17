@@ -12,7 +12,7 @@ public class LoginForm {
 	private String login;
 
 	@NotEmpty(message = "Enter password")
-	@Pattern(regexp = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,12}", message = "Minimum eight characters, at least one letter and one number:")
+	//@Pattern(regexp = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,12}", message = "Enter Valid password")
 	private String password;
 
 	public String getLogin() {
