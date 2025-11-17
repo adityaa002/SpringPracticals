@@ -1,7 +1,5 @@
 package in.co.rays.controller;
 
-import java.lang.ProcessBuilder.Redirect;
-
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -20,7 +18,7 @@ import in.co.rays.form.LoginForm;
 import in.co.rays.service.UserServiceInt;
 
 @Controller
-@RequestMapping(value = "/LoginCtl")
+@RequestMapping(value = "/Login")
 public class LoginCtl {
 
 	@Autowired
@@ -43,15 +41,19 @@ public class LoginCtl {
 	@PostMapping
 	public String submit(@ModelAttribute("form") @Valid LoginForm form, BindingResult bindingResult, Model model,
 			@RequestParam(required = false) String operation, HttpSession session) {
-		if (bindingResult.hasErrors()) {
+		
+		
+		if (operation != null && operation.equals("signUp")) {
 			
-			if (operation != null && operation.equals("signUp")) {
-				return "redirect:UserRegistrationCtl";
+			return "redirect:UserRegistrationCtl";
 
-			}
+		}
+		
+		if (bindingResult.hasErrors()) {
 
 			return "LoginView";
 		}
+		
 
 		UserDTO dto = service.authenticate(form.getLogin(), form.getPassword());
 

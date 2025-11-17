@@ -20,7 +20,7 @@ import in.co.rays.form.UserForm;
 import in.co.rays.service.UserServiceInt;
 
 @Controller
-@RequestMapping(value = "/UserCtl")
+@RequestMapping(value = "/ctl/User")
 public class UserCtl {
 
 	@Autowired
@@ -47,6 +47,7 @@ public class UserCtl {
 	@PostMapping
 	public String submit(@ModelAttribute("form") @Valid UserForm form, @RequestParam(required = false) String operation,
 			BindingResult bindingResult, Model model) {
+
 		System.out.println("Operation : " + operation);
 
 		if (bindingResult.hasErrors()) {
@@ -63,18 +64,17 @@ public class UserCtl {
 		dto.setPassword(form.getPassword());
 		dto.setAddress(form.getAddress());
 
-		if (operation != null && operation.equalsIgnoreCase("update")) {
+		if (form.getId() > 0) {
 			service.update(dto);
 			model.addAttribute("successMessage", "Record Updated Successfully");
-
-		} else if (operation != null && operation.equalsIgnoreCase("save")) {
-
-			service.add(dto);
-			model.addAttribute("successMessage", "Record added successfully");
-
-		} else if (operation != null && operation.equalsIgnoreCase("cancel")) {
-
-			return "redirect:UserCtl/UserList";
+		} else {
+			try {
+				service.add(dto);
+				model.addAttribute("successMessage", "Record Added Successfully");
+			} catch (Exception e) {
+				model.addAttribute("errorMessage", e.getMessage());
+				e.printStackTrace();
+			}
 		}
 
 		return "UserView";
