@@ -80,15 +80,14 @@ public class UserCtl {
 		return "UserView";
 	}
 
-	@GetMapping("/search")
+	@GetMapping("search")
 	public String display(@ModelAttribute("form") UserForm form, Model model) {
 
 		int pageNo = 1;
 		int pageSize = 5;
 
-		
 		List list = service.search(null, pageNo, pageSize);
-				
+
 		form.setPageNo(pageNo);
 
 		model.addAttribute("list", list);
@@ -97,13 +96,15 @@ public class UserCtl {
 
 	}
 
-	@PostMapping("/search")
-	public String submit(@ModelAttribute("form") UserForm form, Model model, @RequestParam String operation) {
+	@PostMapping("search")
+	public String submit(@ModelAttribute("form") UserForm form, Model model,
+			@RequestParam(required = false) String operation) {
 
 		UserDTO dto = null;
 
 		int pageNo = 1;
 		int pageSize = 5;
+
 		System.out.println("operation ==> " + operation);
 
 		if (operation != null && operation.equalsIgnoreCase("next")) {
@@ -111,27 +112,37 @@ public class UserCtl {
 			pageNo = form.getPageNo();
 			pageNo++;
 
-		} else if (operation != null && operation.equalsIgnoreCase("previous")) {
+		}
+		if (operation != null && operation.equalsIgnoreCase("previous")) {
 
 			pageNo = form.getPageNo();
 			pageNo--;
 
-		} else if (operation != null && operation.equalsIgnoreCase("search")) {
+		}
+		if (operation != null && operation.equalsIgnoreCase("search")) {
 			dto = new UserDTO();
 			dto.setFirstName(form.getFirstName());
 			dto.setLogin(form.getLogin());
 
-		} else if (operation != null && operation.equalsIgnoreCase("add")) {
+		}
 
-			return "redirect:/UserCtl";
+		if (operation != null && operation.equalsIgnoreCase("delete")) {
+			if (form.getIds() != null && form.getIds().length > 0) {
+				for (long id : form.getIds()) {
+					UserDTO deleteDto = new UserDTO();
+					deleteDto.setId(id);
+					service.delete(dto);
+				}
 
-		} else if (operation != null && operation.equalsIgnoreCase("reset")) {
-			return "redirect:UserList";
+			} else {
+				model.addAttribute("errorMessage", "Select atleast one record");
+			}
+
 		}
 
 		form.setPageNo(pageNo);
+
 		List list = service.search(dto, pageNo, pageSize);
-		System.out.println("dto :" + list.size());
 
 		model.addAttribute("list", list);
 

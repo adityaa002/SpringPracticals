@@ -18,7 +18,7 @@ import in.co.rays.form.UserRegistrationForm;
 import in.co.rays.service.UserServiceInt;
 
 @Controller
-@RequestMapping(value = "UserRegistrationCtl")
+@RequestMapping(value = "Register")
 public class UserRegistrationCtl {
 
 	@Autowired
@@ -26,7 +26,9 @@ public class UserRegistrationCtl {
 
 	@GetMapping
 	public String display(@ModelAttribute("form") UserRegistrationForm form) {
+		
 		System.out.println("in get display method");
+		
 		return "UserRegistrationView";
 	}
 
@@ -35,9 +37,9 @@ public class UserRegistrationCtl {
 			@RequestParam(required = false) String operation) {
 
 		if (operation.equalsIgnoreCase("signIn")) {
-			return "redirect:LoginCtl";
+			return "redirect:Login";
 		} else if (operation.equalsIgnoreCase("reset")) {
-			return "redirect:UserRegistrationCtl";
+			return "redirect:Register";
 		}
 		
 		if(bindingResult.hasErrors()) {
