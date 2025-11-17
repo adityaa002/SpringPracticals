@@ -96,7 +96,7 @@ public class UserCtl {
 
 	}
 
-	@PostMapping("/ctl/UserList")
+	@PostMapping("/UserList")
 	public String submit(@ModelAttribute("form") UserForm form, Model model, @RequestParam String operation) {
 
 		UserDTO dto = null;
@@ -122,7 +122,7 @@ public class UserCtl {
 
 		} else if (operation != null && operation.equalsIgnoreCase("add")) {
 
-			return "redirect:/ctl/UserCtl";
+			return "redirect:/UserCtl";
 
 		} else if (operation != null && operation.equalsIgnoreCase("reset")) {
 			return "redirect:UserList";

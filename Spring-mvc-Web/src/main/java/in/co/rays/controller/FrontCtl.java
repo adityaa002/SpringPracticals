@@ -12,9 +12,14 @@ public class FrontCtl extends HandlerInterceptorAdapter {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 
-		System.out.println("Intercepting request");
+		
+			System.out.println("Intercepting request");
+			
+			
 
-		HttpSession session = request.getSession();
+			HttpSession session = request.getSession();
+			
+			
 
 		if (session.getAttribute("user") == null) {
 			request.setAttribute("errorMessage", "Session Expired..! Please Login Again");
