@@ -56,16 +56,12 @@ public class UserCtl {
 			System.out.println("Got reset as operation..!");
 			return "redirect:/ctl/User";
 
-		}
-		if ("cancel".equalsIgnoreCase(operation)) {
+		} else if ("cancel".equalsIgnoreCase(operation)) {
 
 			System.out.println("Got cancel as operation..!");
 			return "redirect:/ctl/User/search";
 
-		}
-
-		if (bindingResult.hasErrors()) {
-
+		} else if (bindingResult.hasErrors()) {
 			return "UserView";
 		}
 
@@ -79,22 +75,22 @@ public class UserCtl {
 		dto.setAddress(form.getAddress());
 
 		if ("update".equalsIgnoreCase(operation)) {
-			
+
 			service.update(dto);
-			
+
 			model.addAttribute("successMessage", "Record Updated Successfully");
-			
-		} else if("save".equalsIgnoreCase(operation)){
-			
+
+		} else if ("save".equalsIgnoreCase(operation)) {
+
 			try {
 				service.add(dto);
-				
+
 				model.addAttribute("successMessage", "Record Added Successfully");
-				
+
 			} catch (Exception e) {
-				
+
 				model.addAttribute("errorMessage", e.getMessage());
-				
+
 				e.printStackTrace();
 			}
 		}
@@ -128,7 +124,7 @@ public class UserCtl {
 		int pageSize = 5;
 
 		System.out.println("operation ==> " + operation);
-		
+
 		if (operation != null && operation.equalsIgnoreCase("add")) {
 			return "redirect:/ctl/User";
 
@@ -157,7 +153,6 @@ public class UserCtl {
 			dto.setLogin(form.getLogin());
 
 		}
-		
 
 		if (operation != null && operation.equalsIgnoreCase("delete")) {
 			if (form.getIds() != null && form.getIds().length > 0) {
@@ -165,7 +160,7 @@ public class UserCtl {
 					UserDTO deleteDto = new UserDTO();
 					deleteDto.setId(id);
 					service.delete(deleteDto);
-		            model.addAttribute("successMessage", "Record(s) deleted successfully");
+					model.addAttribute("successMessage", "Record(s) deleted successfully");
 
 				}
 
