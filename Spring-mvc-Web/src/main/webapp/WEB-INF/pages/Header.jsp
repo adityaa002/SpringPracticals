@@ -14,9 +14,9 @@
 
 	<c:if test="${not empty sessionScope.user }">
 		<h3>Hi ${sessionScope.user.firstName },</h3>
-		<a href="<c:url value = "/ctl/UserCtl"/>">Add User</a> |
-		<a href="<c:url value = "/ctl/UserCtl/UserList"/>">User List</a> |
-		<a href="<c:url value = "/LoginCtl?operation=logout"/>">Logout</a>
+		<a href="<c:url value = "/ctl/User"/>">Add User</a> |
+		<a href="<c:url value = "/ctl/User/search"/>">User List</a> |
+		<a href="<c:url value = "/Login?operation=logout"/>">Logout</a>
 	</c:if>
 
 
