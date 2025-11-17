@@ -24,7 +24,7 @@
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/ctl/**" />
-			<bean class="in.co.rays.FrontCtl"></bean>
+			<bean class="in.co.rays.controller.FrontCtl"></bean>
 		</mvc:interceptor>
 	</mvc:interceptors>
 </beans>
