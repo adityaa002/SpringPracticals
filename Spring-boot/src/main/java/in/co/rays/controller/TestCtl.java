@@ -15,10 +15,9 @@ public class TestCtl {
 
 	}
 
-	@PostMapping("submit")
-	public String submit() {
-		return "in submit method";
-
-	}
-
+	/*
+	 * @PostMapping("submit") public String submit() { return "in submit method";
+	 * 
+	 * }
+	 */
 }
