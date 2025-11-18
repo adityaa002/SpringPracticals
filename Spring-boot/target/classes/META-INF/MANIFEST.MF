@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Built-By: Aditya
+Build-Jdk: 11.0.15.1
+Implementation-Title: Spring-boot
+Implementation-Version: 0.0.1-SNAPSHOT
+Implementation-Vendor-Id: in.co.rays
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-boot
+ -starter-parent/Spring-boot
+Created-By: Maven Integration for Eclipse
+

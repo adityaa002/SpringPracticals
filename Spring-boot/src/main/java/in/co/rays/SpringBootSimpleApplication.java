@@ -1,0 +1,14 @@
+package in.co.rays;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class SpringBootSimpleApplication {
+	public static void main(String[] args) {
+		SpringApplication.run(SpringBootSimpleApplication.class, args);
+		System.out.println("spring boot application will start on http://localhost:8080");
+
+	}
+
+}
