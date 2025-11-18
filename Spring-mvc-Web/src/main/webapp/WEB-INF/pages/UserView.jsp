@@ -9,7 +9,7 @@
 <body>
 	<%@include file="Header.jsp"%>
 	<div align="center">
-		<sf:form method="post" modelAttribute="form">
+		<sf:form method="post"  modelAttribute="form">
 			<div align="center">
 
 				<c:if test="${form.id > 0}">
@@ -42,7 +42,7 @@
 				</tr>
 				<tr>
 					<th>Password :</th>
-					<td><sf:input path="password" placeholder="Enter Password" /></td>
+					<td><sf:password path="password" placeholder="Enter Password" /></td>
 					<td style="color: red"><sf:errors path="password" /></td>
 				</tr>
 				<tr>

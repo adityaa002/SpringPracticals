@@ -41,7 +41,7 @@ public class UserCtl {
 
 		}
 
-		System.out.println("in userCtl display method");
+		System.out.println("Getmapping in userCtl display method");
 		return "UserView";
 
 	}

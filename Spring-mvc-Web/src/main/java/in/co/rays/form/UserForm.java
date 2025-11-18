@@ -1,5 +1,7 @@
 package in.co.rays.form;
 
+import javax.validation.constraints.Size;
+
 import org.hibernate.validator.constraints.NotEmpty;
 
 public class UserForm {
@@ -15,7 +17,8 @@ public class UserForm {
 	@NotEmpty(message = "login is required")
 	private String login;
 
-	@NotEmpty(message = "password is required")
+	@NotEmpty(message = "Password is required")
+	@Size(min = 6, message = "Password must be at least 6 characters")
 	private String password;
 
 	@NotEmpty(message = "address is required")
@@ -24,8 +27,6 @@ public class UserForm {
 	private int pageNo;
 
 	private int pageSize;
-	
-	
 
 	private long[] ids;
 
