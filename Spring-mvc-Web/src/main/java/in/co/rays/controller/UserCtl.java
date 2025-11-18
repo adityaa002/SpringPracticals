@@ -59,16 +59,16 @@ public class UserCtl {
 
 		} 
 
-		if (bindingResult.hasErrors()) {
-			return "UserView";
-		}
-
 		if ("cancel".equalsIgnoreCase(operation)) {
 
 			System.out.println("Got cancel as operation..!");
 			return "redirect:/ctl/User/search";
 
 		}
+		if (bindingResult.hasErrors()) {
+			return "UserView";
+		}
+
 
 		UserDTO dto = new UserDTO();
 
