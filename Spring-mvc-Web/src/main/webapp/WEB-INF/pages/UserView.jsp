@@ -52,12 +52,11 @@
 				</tr>
 
 				<tr>
-					<c:if test="${form.id ==0}">
-						<td></td>
-
+					<c:if test="${form.id == null || form.id == 0}">
 						<td><input type="submit" name="operation" value="save">
 							<input type="submit" name="operation" value="reset"></td>
 					</c:if>
+
 
 					<c:if test="${form.id > 0 }">
 						<td></td>

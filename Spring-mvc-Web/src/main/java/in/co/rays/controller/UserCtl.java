@@ -51,18 +51,23 @@ public class UserCtl {
 			BindingResult bindingResult, Model model) {
 
 		System.out.println("Operation : " + operation);
-
+		
 		if ("reset".equalsIgnoreCase(operation)) {
+
 			System.out.println("Got reset as operation..!");
 			return "redirect:/ctl/User";
 
-		} else if ("cancel".equalsIgnoreCase(operation)) {
+		} 
+
+		if (bindingResult.hasErrors()) {
+			return "UserView";
+		}
+
+		if ("cancel".equalsIgnoreCase(operation)) {
 
 			System.out.println("Got cancel as operation..!");
 			return "redirect:/ctl/User/search";
 
-		} else if (bindingResult.hasErrors()) {
-			return "UserView";
 		}
 
 		UserDTO dto = new UserDTO();
