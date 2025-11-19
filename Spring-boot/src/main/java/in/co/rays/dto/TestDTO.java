@@ -1,6 +1,7 @@
 package in.co.rays.dto;
 
 public class TestDTO {
+	
 	private Long id;
 
 	private String firstName;
