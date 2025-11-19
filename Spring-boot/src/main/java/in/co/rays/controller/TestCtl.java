@@ -126,16 +126,19 @@ public class TestCtl {
 	@GetMapping("display6")
 	public ORSResponse display6() {
 		ORSResponse res = new ORSResponse();
-		
+
 		res.addMessage("invalid loginId/password");
-		
+
 		return res;
 
 	}
+
 	@GetMapping("display7")
-	public  ORSResponse display7() {
-		return null;
-		
+	public ORSResponse display7() {
+		ORSResponse res = new ORSResponse();
+		res.addResult("preload", "preloaded data");
+		res.setSuccess(true);
+		return res;
 	}
 
 }
