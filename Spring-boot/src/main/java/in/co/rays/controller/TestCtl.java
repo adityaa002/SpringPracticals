@@ -48,6 +48,7 @@ public class TestCtl {
 	public ORSResponse display2() {
 		ORSResponse res = new ORSResponse();
 		return res;
+
 	}
 
 	@GetMapping("display3")
