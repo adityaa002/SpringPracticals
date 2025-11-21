@@ -4,6 +4,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,7 +37,7 @@ public class RoleCtl extends BaseCtl {
 		long pk = roleService.add(dto);
 
 		res.addData(pk);
-		
+
 		res.addMessage("Role Added Succesfully...!");
 
 		return res;
@@ -62,7 +63,7 @@ public class RoleCtl extends BaseCtl {
 
 	}
 
-	@PostMapping("delete")
+	@PostMapping("delete/{id}")
 	public ORSResponse delete(@RequestBody long id) {
 
 		ORSResponse res = new ORSResponse(true);
@@ -77,7 +78,7 @@ public class RoleCtl extends BaseCtl {
 		dto.setId(id);
 		roleService.delete(dto);
 
-		res.addData(dto.getId());
+		res.addData(id);
 		res.addMessage("Role deleted successfully...!");
 		return res;
 
