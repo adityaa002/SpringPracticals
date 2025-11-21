@@ -36,7 +36,8 @@ public class RoleCtl extends BaseCtl {
 		long pk = roleService.add(dto);
 
 		res.addData(pk);
-		res.addMessage("Role Added Succesfully");
+		
+		res.addMessage("Role Added Succesfully...!");
 
 		return res;
 
@@ -50,8 +51,36 @@ public class RoleCtl extends BaseCtl {
 		if (!res.isSuccess()) {
 			return res;
 		}
-		return null;
-		
+
+		RoleDTO dto = (RoleDTO) form.getDto();
+		roleService.update(dto);
+
+		res.addData(dto);
+		res.addMessage("Role updated successfully...!");
+
+		return res;
+
+	}
+
+	@PostMapping("delete")
+	public ORSResponse delete(@RequestBody RoleForm form) {
+
+		ORSResponse res = new ORSResponse(true);
+
+		if (form.getId() == 0) {
+
+			res.setSuccess(false);
+			res.addMessage("ID is required for delete");
+		}
+
+		RoleDTO dto = new RoleDTO();
+		dto.setId(form.getId());
+		roleService.delete(dto);
+
+		res.addData(dto.getId());
+		res.addMessage("Role deleted successfully...!");
+		return res;
+
 	}
 
 }
