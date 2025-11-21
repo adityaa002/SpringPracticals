@@ -3,8 +3,11 @@ package in.co.rays.dao;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.springframework.stereotype.Repository;
+
 import in.co.rays.dto.RoleDTO;
 
+@Repository
 public class RoleDaoImpl implements RoleDaoInt {
 
 	@PersistenceContext
