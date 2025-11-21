@@ -63,18 +63,18 @@ public class RoleCtl extends BaseCtl {
 	}
 
 	@PostMapping("delete")
-	public ORSResponse delete(@RequestBody RoleForm form) {
+	public ORSResponse delete(@RequestBody long id) {
 
 		ORSResponse res = new ORSResponse(true);
 
-		if (form.getId() == 0) {
+		if (id == 0) {
 
 			res.setSuccess(false);
 			res.addMessage("ID is required for delete");
 		}
 
 		RoleDTO dto = new RoleDTO();
-		dto.setId(form.getId());
+		dto.setId(id);
 		roleService.delete(dto);
 
 		res.addData(dto.getId());
