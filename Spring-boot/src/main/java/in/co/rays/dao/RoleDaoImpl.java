@@ -12,26 +12,32 @@ public class RoleDaoImpl implements RoleDaoInt {
 
 	@Override
 	public long add(RoleDTO dto) {
-		
-		entityManager.persist(dto);
+
+		entityManager.persist(dto); // Add
 		return dto.getId();
-		
+
 	}
 
 	@Override
 	public void update(RoleDTO dto) {
+
+		entityManager.merge(dto); // update
 
 	}
 
 	@Override
 	public void delete(RoleDTO dto) {
 
+		entityManager.remove(dto);
+
 	}
 
 	@Override
-	public RoleDTO findByPk(long id) {
+	public RoleDTO findByPk(long pk) {
 
-		return null;
+		RoleDTO dto = entityManager.find(RoleDTO.class, pk);
+
+		return dto;
 	}
 
 }
