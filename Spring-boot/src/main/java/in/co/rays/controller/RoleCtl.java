@@ -4,7 +4,6 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -63,22 +62,22 @@ public class RoleCtl extends BaseCtl {
 
 	}
 
-	@PostMapping("delete/{id}")
-	public ORSResponse delete(@RequestBody long id) {
+	@PostMapping("delete")
+	public ORSResponse delete(@RequestBody @Valid RoleForm form, BindingResult bindingResult) {
 
 		ORSResponse res = new ORSResponse(true);
 
-		if (id == 0) {
+		if (form.getId() == 0) {
 
 			res.setSuccess(false);
 			res.addMessage("ID is required for delete");
 		}
 
 		RoleDTO dto = new RoleDTO();
-		dto.setId(id);
+		dto.setId(form.getId());
 		roleService.delete(dto);
 
-		res.addData(id);
+		res.addData(form.getId());
 		res.addMessage("Role deleted successfully...!");
 		return res;
 
