@@ -1,5 +1,7 @@
 package in.co.rays.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -30,7 +32,8 @@ public class RoleServiceImpl implements RoleServiceInt {
 
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
-	public void delete(RoleDTO dto) {
+	public void delete(long id) {
+		RoleDTO dto = findByPk(id);
 		roleDao.delete(dto);
 	}
 
@@ -38,6 +41,11 @@ public class RoleServiceImpl implements RoleServiceInt {
 	@Transactional(readOnly = true)
 	public RoleDTO findByPk(long id) {
 		return roleDao.findByPk(id);
+	}
+
+	@Override
+	public List search(RoleDTO dto, int pageNo, int pageSize) {
+		return roleDao.search(dto, pageSize, pageNo);
 	}
 
 }

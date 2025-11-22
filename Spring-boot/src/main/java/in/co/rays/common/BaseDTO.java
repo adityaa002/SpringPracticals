@@ -14,7 +14,7 @@ public class BaseDTO {
 
 	@Id
 	@GeneratedValue(generator = "ncsPK")
-	@GenericGenerator(name = "ncsPk", strategy = "native")
+	@GenericGenerator(name = "ncsPK", strategy = "native")
 	@Column(name = "ID", unique = true , nullable = false)
 	protected Long id;
 
