@@ -62,25 +62,16 @@ public class RoleCtl extends BaseCtl {
 
 	}
 
-	@PostMapping("delete")
-	public ORSResponse delete(@RequestBody @Valid RoleForm form, BindingResult bindingResult) {
+	@PostMapping("delete/{ids}")
+	public ORSResponse delete(@RequestBody Long[] ids) {
 
 		ORSResponse res = new ORSResponse(true);
+		
+		
+		
 
-		if (form.getId() == 0) {
 
-			res.setSuccess(false);
-			res.addMessage("ID is required for delete");
-		}
-
-		RoleDTO dto = new RoleDTO();
-		dto.setId(form.getId());
-		roleService.delete(dto);
-
-		res.addData(form.getId());
-		res.addMessage("Role deleted successfully...!");
-		return res;
-
+		return null;
 	}
 
 }
