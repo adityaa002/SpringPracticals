@@ -1,5 +1,19 @@
 package in.co.rays.dao;
 
-public class UserDaoInt {
+import java.util.List;
+
+import in.co.rays.dto.UserDTO;
+
+public interface UserDaoInt {
+
+	public long add(UserDTO dto);
+
+	public void update(UserDTO dto);
+
+	public void delete(UserDTO dto);
+
+	public UserDTO findByPk(long id);
+
+	public List search(UserDTO dto, int pageNo, int pageSize);
 
 }

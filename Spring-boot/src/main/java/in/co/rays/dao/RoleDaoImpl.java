@@ -15,7 +15,7 @@ import org.springframework.stereotype.Repository;
 
 import in.co.rays.dto.RoleDTO;
 
-@Repository
+@Repository // handle interaction with db or indicate dao class
 public class RoleDaoImpl implements RoleDaoInt {
 
 	@PersistenceContext
