@@ -11,10 +11,12 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import in.co.rays.dto.UserDTO;
 
+
+@Repository
 public class UserDaoImpl implements UserDaoInt {
 
 	@PersistenceContext
