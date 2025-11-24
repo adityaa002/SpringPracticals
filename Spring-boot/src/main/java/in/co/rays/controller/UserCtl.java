@@ -1,7 +1,10 @@
 package in.co.rays.controller;
 
+import java.io.OutputStream;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,12 +14,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import in.co.rays.common.BaseCtl;
 import in.co.rays.common.ORSResponse;
+import in.co.rays.dto.AttatchmentDTO;
 import in.co.rays.dto.UserDTO;
 import in.co.rays.form.UserForm;
+import in.co.rays.service.AttatchmentServiceInt;
 import in.co.rays.service.UserServiceInt;
 
 @RestController
@@ -25,6 +33,9 @@ public class UserCtl extends BaseCtl {
 
 	@Autowired
 	public UserServiceInt userService;
+
+	@Autowired
+	public AttatchmentServiceInt attatchmentService;
 
 	@PostMapping("/save")
 	public ORSResponse save(@RequestBody @Valid UserForm form, BindingResult bindingResult) {
@@ -107,8 +118,8 @@ public class UserCtl extends BaseCtl {
 		UserDTO dto = (UserDTO) form.getDto();
 
 		List list = userService.search(dto, pageNo, 1);
-		
-		if(list == null && list.size() == 0) {
+
+		if (list == null && list.size() == 0) {
 			res.addMessage("No records found");
 			return res;
 		}
@@ -116,7 +127,71 @@ public class UserCtl extends BaseCtl {
 		res.addData(list);
 		res.setSuccess(true);
 		return res;
-		
+
+	}
+
+	@PostMapping("/profilePic/{userId}")
+	public ORSResponse uploadPic(@PathVariable Long userId, @RequestParam("file") MultipartFile file,
+			HttpServletRequest req) {
+
+		AttatchmentDTO attachmentDto = new AttatchmentDTO(file);
+
+		attachmentDto.setDescription("profile picture");
+		attachmentDto.setUserId(userId);
+
+		UserDTO userDto = userService.findByPk(userId);
+
+		if (userDto.getImageId() != null && userDto.getImageId() > 0) {
+			attachmentDto.setId(userDto.getImageId());
+		}
+
+		Long imageId = attatchmentService.add(attachmentDto);
+
+		if (userDto.getImageId() == null) {
+			userDto.setImageId(imageId);
+			userService.update(userDto);
+		}
+		ORSResponse res = new ORSResponse();
+
+		res.addResult("imageId", imageId);
+		res.setSuccess(true);
+
+		return res;
+
+	}
+
+	@GetMapping("/profilePic/{userId}")
+	public @ResponseBody void downloadPic(@PathVariable Long userId, HttpServletResponse response) {
+
+		try {
+			UserDTO dto = userService.findByPk(userId);
+
+			AttatchmentDTO attatchmentDto = null;
+
+			if (dto != null) {
+				attatchmentDto = attatchmentService.findByPk(dto.getImageId());
+				System.out.println("dto is not null");
+			}
+
+			if (attatchmentDto != null) {
+				System.out.println("attDto is not null");
+
+				response.setContentType(attatchmentDto.getType());
+				OutputStream out = response.getOutputStream();
+
+				out.write(attatchmentDto.getDoc());
+
+				out.close();
+
+			} else {
+				response.getWriter().write("ERROR : FILE NOT FOUND");
+
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 	}
 
 }

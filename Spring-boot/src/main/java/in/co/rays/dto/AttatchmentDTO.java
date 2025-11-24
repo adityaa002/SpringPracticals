@@ -1,0 +1,88 @@
+package in.co.rays.dto;
+
+import java.io.IOException;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Lob;
+import javax.persistence.Table;
+
+import org.springframework.web.multipart.MultipartFile;
+
+import in.co.rays.common.BaseDTO;
+
+@Entity
+@Table(name = "ST_ATTATCHMENT")
+public class AttatchmentDTO extends BaseDTO {
+
+	@Column(name = "NAME", length = 100)
+	private String name = null;
+
+	@Column(name = "TYPE", length = 100)
+	private String type = null;
+
+	@Column(name = "DESCRIPTION", length = 500)
+	private String description = null;
+
+	@Column(name = "USER_ID")
+	private Long userId = null;
+
+	@Lob
+	@Column(name = "DOC")
+	private byte[] doc;
+
+	public AttatchmentDTO() {
+	}
+
+	public AttatchmentDTO(MultipartFile file) {
+		name = file.getOriginalFilename();
+		type = file.getContentType();
+
+		try {
+			doc = file.getBytes();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(long userId) {
+		this.userId = userId;
+	}
+
+	public byte[] getDoc() {
+		return doc;
+	}
+
+	public void setDoc(byte[] doc) {
+		this.doc = doc;
+	}
+}
