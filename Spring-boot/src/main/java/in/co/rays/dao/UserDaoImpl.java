@@ -11,16 +11,21 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import in.co.rays.dto.AttatchmentDTO;
 import in.co.rays.dto.UserDTO;
-
+import in.co.rays.service.AttatchmentServiceInt;
 
 @Repository
 public class UserDaoImpl implements UserDaoInt {
 
 	@PersistenceContext
 	public EntityManager entityManager;
+
+	@Autowired
+	public AttatchmentServiceInt attDao;
 
 	@Override
 	public long add(UserDTO dto) {
@@ -36,6 +41,11 @@ public class UserDaoImpl implements UserDaoInt {
 
 	@Override
 	public void delete(UserDTO dto) {
+		AttatchmentDTO aDto = attDao.findByPk(dto.getImageId());
+		if (aDto != null) {
+			attDao.delete(aDto.getId());
+		}
+
 		entityManager.remove(dto);
 	}
 
@@ -95,4 +105,30 @@ public class UserDaoImpl implements UserDaoInt {
 		return list;
 	}
 
+	public UserDTO findByUniqueKey(String attribute, String value) {
+
+		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+
+		CriteriaQuery<UserDTO> cq = builder.createQuery(UserDTO.class);
+
+		Root<UserDTO> qRoot = cq.from(UserDTO.class);
+
+		Predicate condition = builder.equal(qRoot.get(attribute), value);
+
+		cq.where(condition);
+
+		TypedQuery<UserDTO> tq = entityManager.createQuery(cq);
+
+		List<UserDTO> list = tq.getResultList();
+
+		UserDTO dto = null;
+
+		if (list.size() > 0) {
+
+			dto = list.get(0);
+
+		}
+
+		return dto;
+	}
 }

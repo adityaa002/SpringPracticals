@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserServiceInt {
 	@Override
 	@Transactional(readOnly = true)
 	public UserDTO findByPk(long id) {
- 		return userDao.findByPk(id);
+		return userDao.findByPk(id);
 	}
 
 	@Override
@@ -46,6 +46,19 @@ public class UserServiceImpl implements UserServiceInt {
 	public void delete(long id) {
 		UserDTO dto = userDao.findByPk(id);
 		userDao.delete(dto);
+	}
+
+	@Override
+	public UserDTO authenticate(String loginId, String password) {
+		UserDTO dto = userDao.findByUniqueKey("loginId", loginId);
+
+		if (dto != null) {
+			if (dto.getPassword().equals(password)) {
+				return dto;
+			}
+		}
+
+		return null;
 	}
 
 }

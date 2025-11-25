@@ -24,7 +24,7 @@ public class UserDTO extends BaseDTO {
 	@Column(name = "PASSWORD", length = 50)
 	private String password;
 
-	@Column(name = "DATE")
+	@Column(name = "DOB")
 	private Date dob;
 
 	@Column(name = "ROLE_ID")

@@ -5,7 +5,7 @@ import java.util.List;
 import in.co.rays.dto.UserDTO;
 
 public interface UserServiceInt {
-	
+
 	public long add(UserDTO dto);
 
 	public void update(UserDTO dto);
@@ -15,5 +15,7 @@ public interface UserServiceInt {
 	public UserDTO findByPk(long id);
 
 	public List search(UserDTO dto, int pageNo, int pageSize);
+
+	public UserDTO authenticate(String loginId, String password);
 
 }
