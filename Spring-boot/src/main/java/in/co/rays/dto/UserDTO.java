@@ -33,6 +33,7 @@ public class UserDTO extends BaseDTO {
 	@Column(name = "ROLE_NAME", length = 50)
 	private String roleName;
 
+	
 	@Column(name = "IMAGE_ID", length = 50)
 	private Long imageId;
 

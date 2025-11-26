@@ -170,10 +170,10 @@ public class UserCtl extends BaseCtl {
 
 			if (dto != null) {
 				attatchmentDto = attatchmentService.findByPk(dto.getImageId());
-				System.out.println("dto is not null");
-			}
+ 			}
 
 			if (attatchmentDto != null) {
+				
 				System.out.println("attDto is not null");
 
 				response.setContentType(attatchmentDto.getType());

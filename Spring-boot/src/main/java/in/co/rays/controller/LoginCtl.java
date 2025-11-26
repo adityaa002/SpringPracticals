@@ -71,4 +71,17 @@ public class LoginCtl extends BaseCtl {
 
 	}
 
+	@PostMapping("/logout")
+	public ORSResponse logout(HttpSession session) {
+		ORSResponse res = new ORSResponse();
+
+		System.out.println("Session id --> " + session.getId());
+		if (session.getId() != null) {
+			session.invalidate();
+			res.addMessage("Logout Successfully...!");
+			res.setSuccess(true);
+			return res;
+		}
+		return res;
+	}
 }
