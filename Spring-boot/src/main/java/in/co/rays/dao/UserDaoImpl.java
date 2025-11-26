@@ -74,7 +74,7 @@ public class UserDaoImpl implements UserDaoInt {
 			}
 			if (dto.getLoginId() != null && dto.getLoginId().length() > 0) {
 
-				predicateList.add(builder.like(qRoot.get("login"), dto.getLoginId() + "%"));
+				predicateList.add(builder.like(qRoot.get("loginId"), dto.getLoginId() + "%"));
 			}
 			if (dto.getDob() != null) {
 

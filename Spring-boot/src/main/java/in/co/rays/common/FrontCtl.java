@@ -22,8 +22,10 @@ public class FrontCtl extends HandlerInterceptorAdapter {
 
 		String path = request.getServletPath();
 
+		
 		if (!path.startsWith("/Auth/")) {
 
+			
 			if (session.getAttribute("user") == null) {
 
 				response.setContentType("application/json");

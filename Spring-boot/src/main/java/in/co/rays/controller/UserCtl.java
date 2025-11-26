@@ -117,7 +117,7 @@ public class UserCtl extends BaseCtl {
 
 		UserDTO dto = (UserDTO) form.getDto();
 
-		List list = userService.search(dto, pageNo, 1);
+		List list = userService.search(dto, pageNo, 10);
 
 		if (list == null && list.size() == 0) {
 			res.addMessage("No records found");

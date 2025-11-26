@@ -46,10 +46,11 @@ public class LoginCtl extends BaseCtl {
 			res.addMessage("Invalid credentials..!");
 			res.setSuccess(false);
 		}
-		return null;
+		return res;
 
 	}
 
+	@PostMapping("/signUp")
 	public ORSResponse signUp(@RequestBody @Valid UserRegistrationForm form, BindingResult bindingResult) {
 
 		ORSResponse res = validate(bindingResult);

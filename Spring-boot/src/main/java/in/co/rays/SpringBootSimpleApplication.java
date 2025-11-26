@@ -23,10 +23,13 @@ public class SpringBootSimpleApplication {
 
 	@Bean
 	public WebMvcConfigurer webMvcConfig() {
+
 		return new WebMvcConfigurer() {
+
 			@Override
 			public void addInterceptors(InterceptorRegistry registry) {
 				registry.addInterceptor(frontCtl).addPathPatterns("/**").excludePathPatterns("/Auth/**");
+
 			}
 		};
 
