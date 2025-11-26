@@ -33,7 +33,6 @@ public class LoginCtl extends BaseCtl {
 
 			return res;
 		}
-		
 
 		UserDTO dto = userService.authenticate(form.getLoginId(), form.getPassword());
 		if (dto != null) {
