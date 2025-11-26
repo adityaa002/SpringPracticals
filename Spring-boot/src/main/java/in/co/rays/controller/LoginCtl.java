@@ -36,7 +36,6 @@ public class LoginCtl extends BaseCtl {
 		
 		UserDTO dto = userService.authenticate(form.getLoginId(), form.getPassword());
 		if (dto != null) {
-			
 			session.setAttribute("user", dto);
 			res.addData(dto);
 			res.addMessage("User Login Successfully...!!");
