@@ -8,6 +8,8 @@ public interface UserDaoInt {
 
 	public long add(UserDTO dto);
 
+	public void populate(UserDTO dto);
+
 	public void update(UserDTO dto);
 
 	public void delete(UserDTO dto);

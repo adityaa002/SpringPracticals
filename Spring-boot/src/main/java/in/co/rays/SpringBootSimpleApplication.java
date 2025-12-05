@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -12,8 +13,8 @@ import in.co.rays.common.FrontCtl;
 @SpringBootApplication
 public class SpringBootSimpleApplication {
 
-	@Autowired
-	public FrontCtl frontCtl;
+//	@Autowired
+//	public FrontCtl frontCtl;
 
 	public static void main(String[] args) {
 		SpringApplication.run(SpringBootSimpleApplication.class, args);
@@ -21,18 +22,26 @@ public class SpringBootSimpleApplication {
 
 	}
 
+	/*
+	 * @Bean public WebMvcConfigurer webMvcConfig() {
+	 * 
+	 * return new WebMvcConfigurer() {
+	 * 
+	 * @Override public void addInterceptors(InterceptorRegistry registry) {
+	 * registry.addInterceptor(frontCtl).addPathPatterns("/**").excludePathPatterns(
+	 * "/Auth/**");
+	 * 
+	 * } };
+	 */
+
 	@Bean
-	public WebMvcConfigurer webMvcConfig() {
-
-		return new WebMvcConfigurer() {
-
+	public WebMvcConfigurer corsConfig() {
+		WebMvcConfigurer w = new WebMvcConfigurer() {
 			@Override
-			public void addInterceptors(InterceptorRegistry registry) {
-				registry.addInterceptor(frontCtl).addPathPatterns("/**").excludePathPatterns("/Auth/**");
-
+			public void addCorsMappings(CorsRegistry registry) {
+				registry.addMapping("/**").allowedOrigins("http://localhost:4200");
 			}
 		};
-
+		return w;
 	}
-
 }

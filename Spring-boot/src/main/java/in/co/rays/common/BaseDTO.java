@@ -1,6 +1,5 @@
 package in.co.rays.common;
 
- 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -8,14 +7,13 @@ import javax.persistence.MappedSuperclass;
 
 import org.hibernate.annotations.GenericGenerator;
 
- 
 @MappedSuperclass
-public class BaseDTO {
+public abstract class BaseDTO implements DropDownList {
 
 	@Id
 	@GeneratedValue(generator = "ncsPK")
 	@GenericGenerator(name = "ncsPK", strategy = "native")
-	@Column(name = "ID", unique = true , nullable = false)
+	@Column(name = "ID", unique = true, nullable = false)
 	protected Long id;
 
 	public Long getId() {
@@ -24,6 +22,11 @@ public class BaseDTO {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	@Override
+	public String getKey() {
+		return id + "";
 	}
 
 }

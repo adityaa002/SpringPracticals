@@ -20,11 +20,13 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import in.co.rays.common.BaseCtl;
+import in.co.rays.common.DropDownList;
 import in.co.rays.common.ORSResponse;
 import in.co.rays.dto.AttatchmentDTO;
 import in.co.rays.dto.UserDTO;
 import in.co.rays.form.UserForm;
 import in.co.rays.service.AttatchmentServiceInt;
+import in.co.rays.service.RoleServiceInt;
 import in.co.rays.service.UserServiceInt;
 
 @RestController
@@ -36,6 +38,23 @@ public class UserCtl extends BaseCtl {
 
 	@Autowired
 	public AttatchmentServiceInt attatchmentService;
+
+	@Autowired
+	public RoleServiceInt roleService;
+
+	@GetMapping("/preload")
+	public ORSResponse preload() {
+		
+		
+		ORSResponse res = new ORSResponse();
+
+		List<DropDownList> roleList = roleService.search(null, 0, 0);
+
+		res.addResult("roleList", roleList);
+
+		return res;
+
+	}
 
 	@PostMapping("/save")
 	public ORSResponse save(@RequestBody @Valid UserForm form, BindingResult bindingResult) {
@@ -91,7 +110,7 @@ public class UserCtl extends BaseCtl {
 
 	}
 
-	@PostMapping("/delete/{ids}")
+	@GetMapping("/delete/{ids}")
 	public ORSResponse delete(@PathVariable Long[] ids) {
 
 		ORSResponse res = new ORSResponse();
@@ -117,15 +136,15 @@ public class UserCtl extends BaseCtl {
 
 		UserDTO dto = (UserDTO) form.getDto();
 
-		List list = userService.search(dto, pageNo, 10);
+		int pageSize = 5;
 
-		if (list == null && list.size() == 0) {
-			res.addMessage("No records found");
-			return res;
+		List list = userService.search(dto, pageNo, pageSize);
+
+		if (list != null && list.size() > 0) {
+			res.setSuccess(true);
 		}
 
 		res.addData(list);
-		res.setSuccess(true);
 		return res;
 
 	}
@@ -170,10 +189,10 @@ public class UserCtl extends BaseCtl {
 
 			if (dto != null) {
 				attatchmentDto = attatchmentService.findByPk(dto.getImageId());
- 			}
+			}
 
 			if (attatchmentDto != null) {
-				
+
 				System.out.println("attDto is not null");
 
 				response.setContentType(attatchmentDto.getType());

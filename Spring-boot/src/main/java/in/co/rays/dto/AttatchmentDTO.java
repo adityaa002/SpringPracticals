@@ -85,4 +85,9 @@ public class AttatchmentDTO extends BaseDTO {
 	public void setDoc(byte[] doc) {
 		this.doc = doc;
 	}
+
+	@Override
+	public String getValue() {
+ 		return null;
+	}
 }

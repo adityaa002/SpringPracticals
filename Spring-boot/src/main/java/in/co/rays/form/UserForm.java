@@ -90,15 +90,13 @@ public class UserForm extends BaseForm {
 	public BaseDTO getDto() {
 
 		UserDTO dto = (UserDTO) initDTO(new UserDTO());
-		dto.setId(id);
-		dto.setFirstName(firstName);
+ 		dto.setFirstName(firstName);
 		dto.setLastName(lastName);
 		dto.setLoginId(loginId);
 		dto.setPassword(password);
 		dto.setDob(dob);
 		dto.setRoleId(roleId);
-		dto.setRoleName(roleName);
-
+ 
 		return dto;
 
 	}

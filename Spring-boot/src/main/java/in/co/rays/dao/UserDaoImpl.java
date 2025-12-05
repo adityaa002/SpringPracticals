@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import in.co.rays.dto.AttatchmentDTO;
+import in.co.rays.dto.RoleDTO;
 import in.co.rays.dto.UserDTO;
 import in.co.rays.service.AttatchmentServiceInt;
 
@@ -25,10 +26,25 @@ public class UserDaoImpl implements UserDaoInt {
 	public EntityManager entityManager;
 
 	@Autowired
+	public RoleDaoInt roleDao;
+
+	@Autowired
 	public AttatchmentServiceInt attDao;
 
 	@Override
+	public void populate(UserDTO dto) {
+		RoleDTO roleDto = roleDao.findByPk(dto.getRoleId());
+		dto.setRoleName(roleDto.getName());
+
+		if (dto.getId() != null && dto.getId() > 0) {
+			UserDTO userData = findByPk(dto.getId());
+		}
+	}
+	
+
+	@Override
 	public long add(UserDTO dto) {
+		populate(dto);
 		entityManager.persist(dto);
 		return dto.getId();
 	}
@@ -60,7 +76,7 @@ public class UserDaoImpl implements UserDaoInt {
 
 		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
 
-		CriteriaQuery cq = builder.createQuery(UserDTO.class);
+		CriteriaQuery<UserDTO> cq = builder.createQuery(UserDTO.class);
 
 		Root<UserDTO> qRoot = cq.from(UserDTO.class);
 
@@ -69,30 +85,21 @@ public class UserDaoImpl implements UserDaoInt {
 		if (dto != null) {
 
 			if (dto.getFirstName() != null && dto.getFirstName().length() > 0) {
-
 				predicateList.add(builder.like(qRoot.get("firstName"), dto.getFirstName() + "%"));
 			}
-			if (dto.getLoginId() != null && dto.getLoginId().length() > 0) {
 
-				predicateList.add(builder.like(qRoot.get("loginId"), dto.getLoginId() + "%"));
-			}
-			if (dto.getDob() != null) {
-
-				predicateList.add(builder.like(qRoot.get("date"), dto.getDob() + "%"));
+			if (dto.getRoleId() != null && dto.getRoleId() > 0) {
+				predicateList.add(builder.equal(qRoot.get("roleId"), dto.getRoleId()));
 			}
 
-			if (dto.getRoleId() != 0 && dto.getRoleId().SIZE > 0) {
-
-				predicateList.add(builder.like(qRoot.get("roleId"), dto.getRoleId() + "%"));
+			if (dto.getDob() != null && dto.getDob().getTime() > 0) {
+				predicateList.add(builder.equal(qRoot.get("dob"), dto.getDob()));
 			}
-			if (dto.getRoleName() != null && dto.getRoleName().length() > 0) {
-
-				predicateList.add(builder.like(qRoot.get("roleName"), dto.getRoleName() + "%"));
-			}
-
 		}
 
 		cq.where(predicateList.toArray(new Predicate[predicateList.size()]));
+
+		System.out.println("cq ==== >>>> : " + cq.toString());
 
 		TypedQuery<UserDTO> tq = entityManager.createQuery(cq);
 
@@ -102,6 +109,7 @@ public class UserDaoImpl implements UserDaoInt {
 		}
 
 		List<UserDTO> list = tq.getResultList();
+
 		return list;
 	}
 
@@ -131,4 +139,5 @@ public class UserDaoImpl implements UserDaoInt {
 
 		return dto;
 	}
+
 }

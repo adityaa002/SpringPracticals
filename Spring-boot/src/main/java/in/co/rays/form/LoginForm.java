@@ -8,7 +8,7 @@ import in.co.rays.dto.UserDTO;
 
 public class LoginForm extends BaseForm {
 
-	@NotEmpty(message = "LoginId is required !")
+	@NotEmpty(message = "Login Id is required !")
 	private String loginId;
 
 	@NotEmpty(message = "Password is required !")
