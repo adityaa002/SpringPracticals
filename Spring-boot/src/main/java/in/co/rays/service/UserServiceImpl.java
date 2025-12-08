@@ -39,7 +39,8 @@ public class UserServiceImpl implements UserServiceInt {
 	@Transactional(readOnly = true)
 
 	public List search(UserDTO dto, int pageNo, int pageSize) {
-		return userDao.search(dto, pageNo, pageSize);
+		List list = userDao.search(dto, pageNo, pageSize);
+		return list;
 	}
 
 	@Override
@@ -60,5 +61,14 @@ public class UserServiceImpl implements UserServiceInt {
 
 		return null;
 	}
-
+	@Transactional(propagation = Propagation.REQUIRED)
+	public long save(UserDTO dto) {
+		Long id = dto.getId();
+		if (id != null && id > 0) {
+			update(dto);
+		} else {
+			id = add(dto);
+		}
+		return id;
+	}
 }

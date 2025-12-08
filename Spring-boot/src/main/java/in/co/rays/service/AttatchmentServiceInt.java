@@ -11,5 +11,7 @@ public interface AttatchmentServiceInt {
 	public void delete(long id);
 
 	public AttatchmentDTO findByPk(long id);
+	
+	public long save(AttatchmentDTO dto);
 
 }

@@ -15,7 +15,6 @@ public class AttatchmentDaoImpl implements AttatchmentDaoInt {
 
 	@Override
 	public long add(AttatchmentDTO dto) {
-
 		entityManager.persist(dto);
 		return dto.getId();
 

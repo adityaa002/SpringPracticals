@@ -29,7 +29,7 @@ public class UserDaoImpl implements UserDaoInt {
 	public RoleDaoInt roleDao;
 
 	@Autowired
-	public AttatchmentServiceInt attDao;
+	public AttatchmentServiceInt attachmentService;
 
 	@Override
 	public void populate(UserDTO dto) {
@@ -51,15 +51,20 @@ public class UserDaoImpl implements UserDaoInt {
 
 	@Override
 	public void update(UserDTO dto) {
+		populate(dto);
 		entityManager.merge(dto);
 
 	}
 
 	@Override
 	public void delete(UserDTO dto) {
-		AttatchmentDTO aDto = attDao.findByPk(dto.getImageId());
+		
+		AttatchmentDTO aDto = attachmentService.findByPk(dto.getImageId());
+		
+		
 		if (aDto != null) {
-			attDao.delete(aDto.getId());
+		
+			attachmentService.delete(aDto.getId());
 		}
 
 		entityManager.remove(dto);

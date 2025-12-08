@@ -66,10 +66,21 @@ public class UserCtl extends BaseCtl {
 		}
 
 		UserDTO dto = (UserDTO) form.getDto();
-		long pk = userService.add(dto);
+		
+		if (dto.getId() != null && dto.getId() > 0) {
+			userService.update(dto);
+			res.addData(dto.getId());
+			res.addMessage("Data Updated Successfully..!!");
+			res.setSuccess(true);
+		} else {
+			
+			long pk = userService.add(dto);
+			res.addData(pk);
+			res.addMessage("Data added Successfully..!!");
+			res.setSuccess(true);
+		}
 
-		res.addData(pk);
-		res.addMessage("User registered Successfully..!");
+		 
 
 		return res;
 
@@ -156,6 +167,7 @@ public class UserCtl extends BaseCtl {
 		AttatchmentDTO attachmentDto = new AttatchmentDTO(file);
 
 		attachmentDto.setDescription("profile picture");
+		
 		attachmentDto.setUserId(userId);
 
 		UserDTO userDto = userService.findByPk(userId);
@@ -164,10 +176,12 @@ public class UserCtl extends BaseCtl {
 			attachmentDto.setId(userDto.getImageId());
 		}
 
-		Long imageId = attatchmentService.add(attachmentDto);
+		Long imageId = attatchmentService.save(attachmentDto);
 
 		if (userDto.getImageId() == null) {
+			
 			userDto.setImageId(imageId);
+			
 			userService.update(userDto);
 		}
 		ORSResponse res = new ORSResponse();

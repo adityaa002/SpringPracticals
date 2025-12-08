@@ -19,7 +19,9 @@ public class AttatchmentServiceImpl implements AttatchmentServiceInt {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public long add(AttatchmentDTO dto) {
 
-		return attatchmentDao.add(dto);
+		long pk = attatchmentDao.add(dto);
+		
+		return pk;
 	}
 
 	@Override
@@ -29,15 +31,34 @@ public class AttatchmentServiceImpl implements AttatchmentServiceInt {
 	}
 
 	@Override
+	@Transactional(propagation = Propagation.REQUIRED)
 	public void delete(long id) {
+		try {
+		
 		AttatchmentDTO dto = findByPk(id);
 		attatchmentDao.delete(dto);
+		
+		}catch (RuntimeException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 
 	@Override
-	@Transactional(readOnly = true)
 	public AttatchmentDTO findByPk(long id) {
-		return attatchmentDao.findByPk(id);
+		AttatchmentDTO dto = attatchmentDao.findByPk(id);
+		return dto;
 	}
+	
+	@Transactional(propagation = Propagation.REQUIRED)
+	public long save(AttatchmentDTO dto) {
+		Long id = dto.getId();
+		if (id != null && id > 0) {
+			update(dto);
+		} else {
+			id = add(dto);
+		}
+		return id;
+	}
+
 
 }
